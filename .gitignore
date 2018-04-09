@@ -1,0 +1,17 @@
+### Java build files ###
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### React build files ###
+/src/main/react-client/node_modules
+/src/main/react-client/build
+/src/main/resources/static
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### MacOs ###
+.DS_store
