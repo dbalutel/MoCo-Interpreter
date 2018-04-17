@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MocoInterpreterApplication implements CommandLineRunner {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(MocoInterpreterApplication.class, args);
     }
