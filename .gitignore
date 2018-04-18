@@ -6,7 +6,7 @@
 /src/main/react-client/node_modules
 /src/main/react-client/build
 /src/main/resources/static
-src/main/react-client/yarn-error.log
+/src/main/react-client/yarn-error.log
 
 ### IntelliJ IDEA ###
 .idea
