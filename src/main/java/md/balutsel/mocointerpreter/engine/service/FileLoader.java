@@ -2,14 +2,14 @@ package md.balutsel.mocointerpreter.engine.service;
 
 
 import md.balutsel.mocointerpreter.engine.exceptions.NoCourseFilesException;
-import md.balutsel.mocointerpreter.engine.model.engine.CourseFolder;
+import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static md.balutsel.mocointerpreter.engine.model.engine.FileType.*;
+import static md.balutsel.mocointerpreter.engine.model.util.FileType.*;
 
 @Service
 public final class FileLoader {
@@ -43,18 +43,16 @@ public final class FileLoader {
     }
 
     private void mapCourseFolder(CourseFolder courseFolder, File file) {
-
         String fileName = file.getName();
 
         if (fileName.endsWith(JPG)) {
-            courseFolder.getImages().add(file);
+            courseFolder.getImages().put(fileName, file);
         } else if (fileName.endsWith(MP3)) {
-            courseFolder.getMusic().add(file);
+            courseFolder.getMusic().put(fileName, file);
         } else if (fileName.endsWith(MP4)) {
-            courseFolder.getVideos().add(file);
-        } else if (fileName.endsWith(MOC)){
+            courseFolder.getVideos().put(fileName, file);
+        } else if (fileName.endsWith(MOC)) {
             courseFolder.setMocCourse(file);
         }
-
     }
 }

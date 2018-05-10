@@ -1,4 +1,4 @@
-package md.balutsel.mocointerpreter.engine.model.engine;
+package md.balutsel.mocointerpreter.engine.model.util;
 
 public final class FileType {
     public static final String JPG = ".jpg";

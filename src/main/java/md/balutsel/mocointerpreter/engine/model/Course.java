@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class Course {
     private String courseName;
-    private String startUpInfo;
+    private StartUp startUp;
     List<Lesson> lessons;
 }
