@@ -1,10 +1,10 @@
 @Изобразительное искусство Возрождения
 @Курс создан Ситинским Юрием 30.04.2012
-_Course(Изобразительное искусство Возрождения)
+ _Course("Изобразительное искусство Возрождения")
 _Start_Up
 Учебный курс посвящён изобразительному искусству эпохи Ренессанса.
-_End_Start_Up
-_Lesson(1 Введение)
+ _End_Start_Up
+_Lesson(1 "Введение")
 _Information
 
   |*Size = 14*||*Font = B*|Возрождение|*Size = 12*||*Font = B*|, или |*Size = 14*||*Font = B*|Ренессанс|*Size = 12*||*Font = B*| (фр. Renaissance, итал. Rinascimento; от «ri» — «снова» или «заново рожденный»)
@@ -112,7 +112,7 @@ _End_of_Question
 _End_of_Part
 _End_of_Test
 _End_of_Lesson
-_Lesson (2 Раннее Возрождение)
+_Lesson (2 "Раннее Возрождение")
 _Information
 
    |*Font = B*||*Size = 14*|Раннее Возрождение|*Font = B*||*Size = 12*| или |*Font = B*||*Size = 14*|Кватроченто|*Size = 12*||*Font = B*|
@@ -211,7 +211,7 @@ _End_of_Question
 _End_of_Part
 _End_of_Test
 _End_of_Lesson
-_Lesson (3 Высокое Возрождение)
+_Lesson (3 "Высокое Возрождение")
 _Information
 
    |*Font = B*||*Size = 14*|Высокое Возрождение|*Font = B*||*Size = 12*|
@@ -244,7 +244,7 @@ _Information
 
 _End_of_Information
 _End_of_Lesson
-_Lesson (4 Позднее Возрождение)
+_Lesson (4 "Позднее Возрождение")
 _Information
 
    |*Font = B*||*Size = 14*|Позднее Возрождениe|*Font = B*||*Size = 12*| или |*Font = B*||*Size = 14*|Маньеризм|*Font = B*||*Size = 12*|
@@ -270,7 +270,7 @@ _Information
 
 _End_of_Information
 _End_of_Lesson
-_Lesson (5 Северное Возрождение)
+_Lesson (5 "Северное Возрождение" [1..2, 4])
 _Information
 
    |*Font = B*||*Size = 14*|Северное Возрождение|*Font = B*||*Size = 12*|
@@ -364,12 +364,3 @@ _End_of_Test
 _End_of_Lesson
 _End_of_Course
 @Конец курса
-
-
-
-
-
-
-
-
-

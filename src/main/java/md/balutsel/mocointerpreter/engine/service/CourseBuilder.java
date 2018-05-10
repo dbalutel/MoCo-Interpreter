@@ -4,17 +4,25 @@ import md.balutsel.mocointerpreter.engine.exceptions.NoCourseFilesException;
 import md.balutsel.mocointerpreter.engine.exceptions.NoDeclaredCourseException;
 import md.balutsel.mocointerpreter.engine.model.Course;
 import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 
 @Service
 public final class CourseBuilder {
+
+    @Autowired
+    private StartUpBuilder startUpBuilder;
+
+    @Autowired
+    private LessonBuilder lessonBuilder;
 
     public List<Course> buildCourses(List<CourseFolder> courseFolders) {
         return courseFolders
@@ -24,42 +32,37 @@ public final class CourseBuilder {
     }
 
     private Course parseMocFile(CourseFolder courseFolder) {
-        try (Scanner scanner = new Scanner(courseFolder.getMocCourse())) {
-            int lineIndex = 0;
+        try {
+
+            List<String> fileLines = Files.lines(Paths.get(courseFolder.getMocCourse().toURI()))
+                    .filter(this::notComment)
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+
             Course course = new Course();
-            while (scanner.hasNextLine()) {
-                String currentLine = scanner.nextLine();
+            course.setCourseName(extractCourseName(fileLines));
+            course.setStartUp(startUpBuilder.extractStartUp(fileLines));
+            course.setLessons(lessonBuilder.extractLessons(fileLines));
 
-                if (isComment(currentLine)) {
-                    continue;
-                } else {
-                    if (lineIndex == 0 && isCourseStarted(currentLine)) {
-                        course.setCourseName(extractCourseName(currentLine));
-                    } else if (lineIndex == 0) {
-                        throw new NoDeclaredCourseException();
-                    } else {
-                        if (currentLine.matches(START_UP_LITERAL));
-                    }
-                }
-
-                lineIndex++;
-            }
             return course;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new NoCourseFilesException();
         }
     }
 
-    private boolean isComment(String line) {
-        return line.startsWith(COMMENT);
+    private boolean notComment(String line) {
+        return !line.startsWith(COMMENT);
     }
 
-    private boolean isCourseStarted(String line) {
-        return line.matches(COURSE_START_LITERAL);
+    private String extractCourseName(List<String> fileLines) {
+        fileLines.forEach(System.out::println);
+        if (fileLines.get(0).matches(COURSE_START_LITERAL) && fileLines.get(fileLines.size() - 1).equals(COURSE_END_LITERAL)) {
+            String courseName = fileLines.get(0).replaceAll("^\\s*_Course\\s*\\(*\\s*\"", "");
+            return courseName.replaceAll("\"\\s*\\)\\s*$", "");
+        } else {
+            throw new NoDeclaredCourseException();
+        }
     }
 
-    private String extractCourseName(String courseStartLine) {
-        String courseName = courseStartLine.replaceAll("^_Course\\s*\\(*\\s*", "");
-        return courseName.replaceAll("\\s*\\)$", "");
-    }
+
 }
