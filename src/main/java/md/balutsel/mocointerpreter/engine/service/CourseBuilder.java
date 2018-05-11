@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
@@ -33,16 +34,18 @@ public final class CourseBuilder {
 
     private Course parseMocFile(CourseFolder courseFolder) {
         try {
-
             List<String> fileLines = Files.lines(Paths.get(courseFolder.getMocCourse().toURI()))
-                    .filter(this::notComment)
                     .map(String::trim)
+                    .filter(this::notComment)
+                    .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
+
+            String reducedLines = fileLines.parallelStream().collect(Collectors.joining("\n"));
 
             Course course = new Course();
             course.setCourseName(extractCourseName(fileLines));
-            course.setStartUp(startUpBuilder.extractStartUp(fileLines));
-            course.setLessons(lessonBuilder.extractLessons(fileLines));
+            course.setStartUp(startUpBuilder.extractStartUp(reducedLines));
+            course.setLessons(lessonBuilder.extractLessons(reducedLines));
 
             return course;
         } catch (IOException e) {
@@ -55,14 +58,8 @@ public final class CourseBuilder {
     }
 
     private String extractCourseName(List<String> fileLines) {
-        fileLines.forEach(System.out::println);
-        if (fileLines.get(0).matches(COURSE_START_LITERAL) && fileLines.get(fileLines.size() - 1).equals(COURSE_END_LITERAL)) {
-            String courseName = fileLines.get(0).replaceAll("^\\s*_Course\\s*\\(*\\s*\"", "");
-            return courseName.replaceAll("\"\\s*\\)\\s*$", "");
-        } else {
-            throw new NoDeclaredCourseException();
-        }
+        return fileLines.get(0)
+                .replaceAll("^_Course\\s*\\(*\\s*\"", "")
+                .replaceAll("\"\\s*\\)$", "");
     }
-
-
 }

@@ -59,7 +59,7 @@ _Information
 |*Video = Эпоха Возрождения.mp4*|
 
 _End_of_Information
-_Test ("Sample") It is a sample of test
+_Test("Sample") It is a sample of test
 _Part (3)
 _Question (_Single, 3) Sample of Single question
 $(_Wrong, 0) wrong #1
@@ -110,6 +110,60 @@ $(_Help) Help for Single #1
 $(_eXceed) Exceed of single
 _End_of_Question
 _End_of_Part
+_Part (3)
+_Question (_Single, 3) Sample of Single question
+$(_Wrong, 0) wrong #1
+$(_Wrong, 0) wrong #2
+$(_Wrong, -1) wrong #3
+$(_Reaction) reaction for first 3 wrong
+$(_Correct, 1) correct #4
+$(_Reaction) reaction for correct
+$(_eXceed) Exceed of single
+_End_of_Question
+_Question (_Multiple, 3) Sample of multiple question
+$(_Correct) correct #1
+$(_Wrong) wrong #1
+$(_Wrong) wrong #2
+$(_Correct) correct #2
+$(_Help) Pomoshi for Multiple #1
+$(_Help) Pomoshi for Multiple #2
+$(_Help) Pomoshi for Multiple #3
+$(_Help) Pomoshi for Multiple #4
+$(_Help) Pomoshi for Multiple #5
+$(_Diagnostics _Correct, _All _Correct, 2)
+$(_Reaction) All Correct
+$(_Diagnostics _Correct, 2 _Wrong; 1 _Correct)
+$(_Reaction) 2 Wrong; 1 Correct
+$(_Diagnostics _Wrong, _Less 2 _Wrong; 2 _Correct, 6)
+$(_Reaction) Less 2 Wrong; 2 Correct
+$(_Diagnostics _Wrong, _More 1 _Correct, 1)
+$(_Reaction) More 1 Wrong
+_End_of_Question
+_Question (_Free) Translate the word "life", please
+$(_Correct, 2, 1) Resurs
+$(_Reaction) Right!
+$(_Wrong, 1) ghjgfjg
+$(_Reaction) You are wrong!
+$(_Undefined) Ne poneatno.
+$(_eXceed) U vas bolishe net popitok.
+$(_Help) Pomoshi #1
+$(_Help) Pomoshi #2
+_End_of_Question
+_Question (_Single, 3) Sample of Single question
+$(_Wrong, 0) wrong #2.1
+$(_Wrong, 0) wrong #2.2
+$(_Wrong, -1) wrong #2.3
+$(_Reaction) reaction for first 3 wrong
+$(_Correct, 1) correct #2.4
+$(_Reaction) reaction for correct
+$(_Help) Help for Single #1
+$(_eXceed) Exceed of single
+_End_of_Question
+_End_of_Part
+_Evaluate ( 5 ) Ваша оценка – отлично.
+_Evaluate ( 4 ) Ваша оценка – хорошо.
+_Evaluate (2..3 ) Ваша оценка – удовлетворительно.
+_Evaluate(_Other) Вы не справились с тестом. Рекомендую повторить материал.
 _End_of_Test
 _End_of_Lesson
 _Lesson (2 "Раннее Возрождение")
@@ -158,7 +212,7 @@ _Information
 Доменико Гирландайо. «Портрет Джованны Торнабуони»
 
 _End_of_Information
-_Test ("Sample") It is a sample of test
+_Test("Sample") It is a sample of test
 _Part (3)
 _Question (_Single, 3) Sample of Single question
 $(_Wrong, 0) wrong #1
@@ -309,7 +363,7 @@ _Information
 Гольбейн, Ганс (Младший). Портрет Генриха VIII
 
 _End_of_Information
-_Test ("Sample") It is a sample of test
+_Test("Sample") It is a sample of test
 _Part (3)
 _Question (_Single, 3) Sample of Single question
 $(_Wrong, 0) wrong #1

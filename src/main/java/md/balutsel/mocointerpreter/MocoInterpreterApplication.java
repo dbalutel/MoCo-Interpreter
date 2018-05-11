@@ -9,6 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+// TODO integrity verification
+// TODO backend services
+// TODO persistence + relation
+// TODO replace all media tags
+// TODO UI
+// TODO Check scenario
+
 @SpringBootApplication
 public class MocoInterpreterApplication implements CommandLineRunner {
 
@@ -17,7 +24,7 @@ public class MocoInterpreterApplication implements CommandLineRunner {
     }
 
     @Autowired
-    Engine engine;
+    private Engine engine;
 
     @Override
     public void run(String... args) {

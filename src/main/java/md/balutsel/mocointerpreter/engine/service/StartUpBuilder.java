@@ -6,38 +6,28 @@ import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.END_START_UP_LITERAL;
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.START_UP_LITERAL;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 
 @Service
 public class StartUpBuilder {
 
-    public StartUp extractStartUp(List<String> fileLines) {
+    public StartUp extractStartUp(String reducedLines) {
         StartUp startUp = new StartUp();
-        startUp.setStartUpText(validateStartUp(fileLines));
+        startUp.setStartUpText(extractText(reducedLines));
         return startUp;
     }
 
-    private String validateStartUp(List<String> fileLines) {
-        if (fileLines.get(1).equals(START_UP_LITERAL)) {
-            try {
-                List<String> startUpSection = fileLines.subList(fileLines.indexOf(START_UP_LITERAL),
-                        fileLines.indexOf(END_START_UP_LITERAL) + 1);
-
-                List<String> startUpText = startUpSection.subList(1, startUpSection.size() - 1);
-
-                if (startUpText.stream().anyMatch(textLine -> textLine.startsWith("_"))) {
-                    throw new GrammarException();
-                } else {
-                    return startUpText.stream().reduce(" ", String::concat);
-                }
-            } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-                throw new NoStrartUpSection();
-            }
-        } else {
-            throw new NoStrartUpSection();
-        }
-
+    private String extractText(String reducedLines) {
+        return Pattern.compile(START_UP_SECTION)
+                .matcher(reducedLines)
+                .results()
+                .map(MatchResult::group)
+                .map(s -> s.replaceAll(START_UP_LITERAL, "").replaceAll(END_START_UP_LITERAL, ""))
+                .findAny()
+                .orElseThrow(GrammarException::new);
     }
 }
