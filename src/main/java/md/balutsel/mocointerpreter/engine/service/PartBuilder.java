@@ -2,6 +2,7 @@ package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.Part;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import static md.balutsel.mocointerpreter.engine.model.util.Literals.TEST_SECTIO
 
 @Service
 public class PartBuilder {
+
+    @Autowired
+    private QuestionBuilder questionBuilder;
 
     public List<Part> extractParts(String testString) {
         return Pattern.compile(PART_SECTION)
@@ -32,7 +36,7 @@ public class PartBuilder {
 
         Part part = new Part();
         part.setToAsk(extractHowManyToAsk(partLines.get(0)));
-        part.setQuestions(null);
+        part.setQuestions(questionBuilder.extractQuestions(testString));
 
         return part;
     }

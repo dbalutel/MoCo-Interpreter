@@ -59,110 +59,70 @@ _Information
 |*Video = Эпоха Возрождения.mp4*|
 
 _End_of_Information
-_Test("Sample") It is a sample of test
+_Test("Вводный тест.") Проверка усвоенния материала по первой лекции
 _Part (3)
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #1
-$(_Wrong, 0) wrong #2
-$(_Wrong, -1) wrong #3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #4
-$(_Reaction) reaction for correct
-$(_eXceed) Exceed of single
+_Question (_Single, 3) Годы жизни Пьеро Кавалли:
+$(_Wrong, -1) 1996-2018
+$(_Wrong, 0) 1284—1344
+$(_Reaction) Близко, но нет.
+$(_Correct, 1) 1259—1344
+$(_Reaction) Верно!
+$(_eXceed) Попытки исчерпаны!
 _End_of_Question
-_Question (_Multiple, 3) Sample of multiple question
-$(_Correct) correct #1
-$(_Wrong) wrong #1
-$(_Wrong) wrong #2
-$(_Correct) correct #2
-$(_Help) Pomoshi for Multiple #1
-$(_Help) Pomoshi for Multiple #2
-$(_Help) Pomoshi for Multiple #3
-$(_Help) Pomoshi for Multiple #4
-$(_Help) Pomoshi for Multiple #5
+_Question (_Multiple, 3) Выберите названия веков в итальнской культуре:
+$(_Correct) дученто
+$(_Correct) треченто
+$(_Wrong) квазенто
+$(_Correct) кватроченто
+$(_Help) Различные века в истории итальянского искусства имеют названия, образованные от соответствующих числительных.
+$(_Help) Имеют окончания "ento".
 $(_Diagnostics _Correct, _All _Correct, 2)
-$(_Reaction) All Correct
+$(_Reaction) Все верно!
 $(_Diagnostics _Correct, 2 _Wrong; 1 _Correct)
-$(_Reaction) 2 Wrong; 1 Correct
+$(_Reaction) 2 Неверных, 1 Верный
 $(_Diagnostics _Wrong, _Less 2 _Wrong; 2 _Correct, 6)
-$(_Reaction) Less 2 Wrong; 2 Correct
+$(_Reaction) Меньше 2 Неверных, 2 Верных
 $(_Diagnostics _Wrong, _More 1 _Correct, 1)
-$(_Reaction) More 1 Wrong
+$(_Reaction) Больше 1 неверного
 _End_of_Question
-_Question (_Free) Translate the word "life", please
-$(_Correct, 2, 1) Resurs
-$(_Reaction) Right!
-$(_Wrong, 1) ghjgfjg
-$(_Reaction) You are wrong!
-$(_Undefined) Ne poneatno.
-$(_eXceed) U vas bolishe net popitok.
-$(_Help) Pomoshi #1
-$(_Help) Pomoshi #2
-_End_of_Question
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #2.1
-$(_Wrong, 0) wrong #2.2
-$(_Wrong, -1) wrong #2.3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #2.4
-$(_Reaction) reaction for correct
-$(_Help) Help for Single #1
-$(_eXceed) Exceed of single
+_Question (_Free) Эпоха в истории культуры Европы, пришедшая на смену культуре Средних веков и предшествующая культуре нового времени.
+$(_Correct, 1) Ренессанс
+$(_Reaction) Верно!
+$(_Wrong, 1) Барокко
+$(_Reaction) Неверно!
+$(_Undefined) Неясный ответ.
+$(_eXceed) Все попытки исчерпаны.
+$(_Help)  итал. Rinascimento; от «ri» — «снова» или «заново рожденный».
 _End_of_Question
 _End_of_Part
-_Part (3)
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #1
-$(_Wrong, 0) wrong #2
-$(_Wrong, -1) wrong #3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #4
-$(_Reaction) reaction for correct
-$(_eXceed) Exceed of single
+_Part (1)
+_Question (_Single, 3) Век появления первых предвестников искусства Возрождения в Италии:
+$(_Wrong, 0) XVI
+$(_Wrong, -1) XXXVI
+$(_Reaction) Подумайте хорошо!
+$(_Correct, 1) XIV
+$(_Reaction) Верно!
+$(_eXceed) Попытки исчерпаны!
 _End_of_Question
-_Question (_Multiple, 3) Sample of multiple question
-$(_Correct) correct #1
-$(_Wrong) wrong #1
-$(_Wrong) wrong #2
-$(_Correct) correct #2
-$(_Help) Pomoshi for Multiple #1
-$(_Help) Pomoshi for Multiple #2
-$(_Help) Pomoshi for Multiple #3
-$(_Help) Pomoshi for Multiple #4
-$(_Help) Pomoshi for Multiple #5
+_Question (_Multiple, 3) Первые из художников эпои Возраждения в XIV веке:
+$(_Correct) Пьетро Каваллини
+$(_Wrong) Леонардо да Винчи
+$(_Wrong) Малевич
+$(_Correct) Симоне Мартини
+$(_Help) Черный квадрат нарисован гораздо позже!
 $(_Diagnostics _Correct, _All _Correct, 2)
-$(_Reaction) All Correct
+$(_Reaction) Все верно
 $(_Diagnostics _Correct, 2 _Wrong; 1 _Correct)
-$(_Reaction) 2 Wrong; 1 Correct
+$(_Reaction) 2 Неверно, 1 Верно
 $(_Diagnostics _Wrong, _Less 2 _Wrong; 2 _Correct, 6)
-$(_Reaction) Less 2 Wrong; 2 Correct
+$(_Reaction) Меньше 2 неверно, 2 Верно
 $(_Diagnostics _Wrong, _More 1 _Correct, 1)
-$(_Reaction) More 1 Wrong
-_End_of_Question
-_Question (_Free) Translate the word "life", please
-$(_Correct, 2, 1) Resurs
-$(_Reaction) Right!
-$(_Wrong, 1) ghjgfjg
-$(_Reaction) You are wrong!
-$(_Undefined) Ne poneatno.
-$(_eXceed) U vas bolishe net popitok.
-$(_Help) Pomoshi #1
-$(_Help) Pomoshi #2
-_End_of_Question
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #2.1
-$(_Wrong, 0) wrong #2.2
-$(_Wrong, -1) wrong #2.3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #2.4
-$(_Reaction) reaction for correct
-$(_Help) Help for Single #1
-$(_eXceed) Exceed of single
+$(_Reaction) Больше 1 неверно!
 _End_of_Question
 _End_of_Part
 _Evaluate ( 5 ) Ваша оценка – отлично.
 _Evaluate ( 4 ) Ваша оценка – хорошо.
-_Evaluate (2..3 ) Ваша оценка – удовлетворительно.
+_Evaluate (2..3) Ваша оценка – удовлетворительно.
 _Evaluate(_Other) Вы не справились с тестом. Рекомендую повторить материал.
 _End_of_Test
 _End_of_Lesson
@@ -212,59 +172,8 @@ _Information
 Доменико Гирландайо. «Портрет Джованны Торнабуони»
 
 _End_of_Information
-_Test("Sample") It is a sample of test
-_Part (3)
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #1
-$(_Wrong, 0) wrong #2
-$(_Wrong, -1) wrong #3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #4
-$(_Reaction) reaction for correct
-$(_eXceed) Exceed of single
-_End_of_Question
-_Question (_Multiple, 3) Sample of multiple question
-$(_Correct) correct #1
-$(_Wrong) wrong #1
-$(_Wrong) wrong #2
-$(_Correct) correct #2
-$(_Help) Pomoshi for Multiple #1
-$(_Help) Pomoshi for Multiple #2
-$(_Help) Pomoshi for Multiple #3
-$(_Help) Pomoshi for Multiple #4
-$(_Help) Pomoshi for Multiple #5
-$(_Diagnostics _Correct, _All _Correct, 2)
-$(_Reaction) All Correct
-$(_Diagnostics _Correct, 2 _Wrong; 1 _Correct)
-$(_Reaction) 2 Wrong; 1 Correct
-$(_Diagnostics _Wrong, _Less 2 _Wrong; 2 _Correct, 6)
-$(_Reaction) Less 2 Wrong; 2 Correct
-$(_Diagnostics _Wrong, _More 1 _Correct, 1)
-$(_Reaction) More 1 Wrong
-_End_of_Question
-_Question (_Free) Translate the word "life", please
-$(_Correct, 2, 1) Resurs
-$(_Reaction) Right!
-$(_Wrong, 1) ghjgfjg
-$(_Reaction) You are wrong!
-$(_Undefined) Ne poneatno.
-$(_eXceed) U vas bolishe net popitok.
-$(_Help) Pomoshi #1
-$(_Help) Pomoshi #2
-_End_of_Question
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #2.1
-$(_Wrong, 0) wrong #2.2
-$(_Wrong, -1) wrong #2.3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #2.4
-$(_Reaction) reaction for correct
-$(_Help) Help for Single #1
-$(_eXceed) Exceed of single
-_End_of_Question
-_End_of_Part
-_End_of_Test
 _End_of_Lesson
+
 _Lesson (3 "Высокое Возрождение")
 _Information
 
@@ -363,58 +272,6 @@ _Information
 Гольбейн, Ганс (Младший). Портрет Генриха VIII
 
 _End_of_Information
-_Test("Sample") It is a sample of test
-_Part (3)
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #1
-$(_Wrong, 0) wrong #2
-$(_Wrong, -1) wrong #3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #4
-$(_Reaction) reaction for correct
-$(_eXceed) Exceed of single
-_End_of_Question
-_Question (_Multiple, 3) Sample of multiple question
-$(_Correct) correct #1
-$(_Wrong) wrong #1
-$(_Wrong) wrong #2
-$(_Correct) correct #2
-$(_Help) Pomoshi for Multiple #1
-$(_Help) Pomoshi for Multiple #2
-$(_Help) Pomoshi for Multiple #3
-$(_Help) Pomoshi for Multiple #4
-$(_Help) Pomoshi for Multiple #5
-$(_Diagnostics _Correct, _All _Correct, 2)
-$(_Reaction) All Correct
-$(_Diagnostics _Correct, 2 _Wrong; 1 _Correct)
-$(_Reaction) 2 Wrong; 1 Correct
-$(_Diagnostics _Wrong, _Less 2 _Wrong; 2 _Correct, 6)
-$(_Reaction) Less 2 Wrong; 2 Correct
-$(_Diagnostics _Wrong, _More 1 _Correct, 1)
-$(_Reaction) More 1 Wrong
-_End_of_Question
-_Question (_Free) Translate the word "life", please
-$(_Correct, 2, 1) Resurs
-$(_Reaction) Right!
-$(_Wrong, 1) ghjgfjg
-$(_Reaction) You are wrong!
-$(_Undefined) Ne poneatno.
-$(_eXceed) U vas bolishe net popitok.
-$(_Help) Pomoshi #1
-$(_Help) Pomoshi #2
-_End_of_Question
-_Question (_Single, 3) Sample of Single question
-$(_Wrong, 0) wrong #2.1
-$(_Wrong, 0) wrong #2.2
-$(_Wrong, -1) wrong #2.3
-$(_Reaction) reaction for first 3 wrong
-$(_Correct, 1) correct #2.4
-$(_Reaction) reaction for correct
-$(_Help) Help for Single #1
-$(_eXceed) Exceed of single
-_End_of_Question
-_End_of_Part
-_End_of_Test
 _End_of_Lesson
 _End_of_Course
 @Конец курса

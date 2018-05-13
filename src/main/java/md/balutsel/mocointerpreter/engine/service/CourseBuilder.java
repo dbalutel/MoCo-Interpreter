@@ -3,6 +3,8 @@ package md.balutsel.mocointerpreter.engine.service;
 import md.balutsel.mocointerpreter.engine.exceptions.NoCourseFilesException;
 import md.balutsel.mocointerpreter.engine.exceptions.NoDeclaredCourseException;
 import md.balutsel.mocointerpreter.engine.model.Course;
+import md.balutsel.mocointerpreter.engine.model.FreeQuestion;
+import md.balutsel.mocointerpreter.engine.model.Question;
 import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
