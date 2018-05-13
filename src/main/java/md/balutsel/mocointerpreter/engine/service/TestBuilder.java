@@ -2,6 +2,7 @@ package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.TextStyle;
@@ -16,6 +17,9 @@ import static md.balutsel.mocointerpreter.engine.model.util.Literals.TEST_START_
 
 @Service
 public class TestBuilder {
+
+    @Autowired
+    private PartBuilder partBuilder;
 
     public Test extractTest(String lessonString) {
         return Pattern.compile(TEST_SECTION)
@@ -34,13 +38,12 @@ public class TestBuilder {
         Test test = new Test();
         test.setName(extractTestName(testLines.get(0)));
         test.setInformation(extractTestInfo(testLines.get(0)));
-        test.setParts(null);
+        test.setParts(partBuilder.extractParts(testString));
 
         return test;
     }
 
     private String extractTestName(String line) {
-
         if (line.matches(TEST_START_LITERAL)) {
             return line.substring(line.indexOf("\"") + 1, line.lastIndexOf("\""));
         } else {
@@ -49,6 +52,10 @@ public class TestBuilder {
     }
 
     private String extractTestInfo(String line) {
-        return null;
+        if (line.matches(TEST_START_LITERAL)) {
+                return line.substring(line.indexOf(")") + 1).trim();
+        } else {
+            throw new GrammarException();
+        }
     }
 }
