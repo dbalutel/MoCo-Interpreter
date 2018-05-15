@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./404.css";
-import {Button, Card, CardActions, CardContent, Typography} from "material-ui";
+import {CardContent, Typography} from "material-ui";
 
 class NotFound extends Component {
     render() {

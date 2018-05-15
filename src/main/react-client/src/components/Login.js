@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Button, CardActions, CardContent, Grid, InputAdornment, MenuItem, TextField, Typography} from "material-ui";
 import {AccountCircle} from "@material-ui/icons/index";
 import axios from "axios/index";
-import Redirect from "react-router-dom/es/Redirect";
 import {withRouter} from "react-router-dom";
 
 class Login extends Component {
@@ -18,7 +17,6 @@ class Login extends Component {
     };
 
     componentDidMount() {
-        console.log("mounted");
         axios.get("/api/courses")
             .then(result => {
                 console.log("call courses");
@@ -35,7 +33,6 @@ class Login extends Component {
     };
 
     logIn = () => {
-        console.log("login");
         axios.get("/api/login/" + this.state.username + "/course/" + this.state.courseName)
             .then(result => {
                 sessionStorage.setItem("username", result.data);

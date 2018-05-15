@@ -2,8 +2,6 @@ package md.balutsel.mocointerpreter;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import md.balutsel.mocointerpreter.backend.model.User;
-import md.balutsel.mocointerpreter.backend.repository.UserRepository;
 import md.balutsel.mocointerpreter.engine.Engine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
