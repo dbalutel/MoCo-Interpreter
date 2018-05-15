@@ -17,8 +17,13 @@ public final class Engine {
     @Autowired
     private CourseBuilder courseBuilder;
 
+    private List<Course> courses;
+
     public void startUp() {
-        List<Course> courseBuilderList = courseBuilder.buildCourses(fileLoader.initializeCourseFolders());
-        System.out.println(courseBuilderList);
+        courses = courseBuilder.buildCourses(fileLoader.initializeCourseFolders());
+    }
+
+    public List<Course> getCourses() {
+        return this.courses;
     }
 }

@@ -1,14 +1,11 @@
 package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
-import md.balutsel.mocointerpreter.engine.exceptions.NoStrartUpSection;
 import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 

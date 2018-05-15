@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.PART_SECTION;
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.PART_START_LITERAL;
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.TEST_SECTION;
 
 @Service
 public class PartBuilder {

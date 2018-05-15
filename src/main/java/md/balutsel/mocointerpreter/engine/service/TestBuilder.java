@@ -5,13 +5,11 @@ import md.balutsel.mocointerpreter.engine.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.LESSON_SECTION;
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.TEST_SECTION;
 import static md.balutsel.mocointerpreter.engine.model.util.Literals.TEST_START_LITERAL;
 

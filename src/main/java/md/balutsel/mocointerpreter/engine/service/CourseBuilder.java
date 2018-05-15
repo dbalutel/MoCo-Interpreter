@@ -1,10 +1,7 @@
 package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.NoCourseFilesException;
-import md.balutsel.mocointerpreter.engine.exceptions.NoDeclaredCourseException;
 import md.balutsel.mocointerpreter.engine.model.Course;
-import md.balutsel.mocointerpreter.engine.model.FreeQuestion;
-import md.balutsel.mocointerpreter.engine.model.Question;
 import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +10,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.COMMENT;
 
 @Service
 public final class CourseBuilder {

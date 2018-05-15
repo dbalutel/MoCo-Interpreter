@@ -5,8 +5,10 @@ import md.balutsel.mocointerpreter.engine.exceptions.NoCourseFilesException;
 import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static md.balutsel.mocointerpreter.engine.model.util.FileType.*;

@@ -25,7 +25,7 @@ public class Literals {
     public static final String PART_START_LITERAL = "^_Part\\s*\\((\\d+|All)\\)$";
     public static final String PART_SECTION = "_Part\\s*\\((\\d+|All)\\)\\n(.*\\n)((?!_End_of_Part).*\\n)*_End_of_Part";
 
-    public static final String QUESTION_START_LITERAL = "^_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*\\n$";
+    public static final String QUESTION_START_LITERAL = "^_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*$";
     public static final String QUESTION_SECTION = "_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*\\n((?!_End_of_Question).*\\n)*_End_of_Question";
 
     public static final String FREE_QUESTION = "_Free";
