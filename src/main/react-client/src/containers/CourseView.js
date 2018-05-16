@@ -1,28 +1,19 @@
 import React, {Component} from 'react';
+import "./CourseView.css";
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List, {ListItem, ListItemText} from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
-import Divider from 'material-ui/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import CourseContent from "../components/CourseContent";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        height: '100%',
-        zIndex: 1,
-        overflow: 'hidden',
-        position: 'relative',
-        display: 'flex',
-        width: '100%',
-    },
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
@@ -36,7 +27,6 @@ const styles = theme => ({
             display: 'none',
         },
     },
-    toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
         [theme.breakpoints.up('md')]: {
@@ -50,7 +40,7 @@ const styles = theme => ({
     },
 });
 
-class ResponsiveDrawer extends Component {
+class CourseView extends Component {
     state = {
         mobileOpen: false,
     };
@@ -62,26 +52,8 @@ class ResponsiveDrawer extends Component {
     render() {
         const { classes, theme } = this.props;
 
-        const drawer = (
-            <div>
-                <div className={classes.toolbar} />
-                <Divider />
-                <List>
-                    <ListItem button>
-                        <ListItemText primary="1"/>
-                    </ListItem>
-                </List>
-                <Divider />
-                <List>
-                    <ListItem button>
-                        <ListItemText primary="2"/>
-                    </ListItem>
-                </List>
-            </div>
-        );
-
         return (
-            <div className={classes.root}>
+            <div className="root">
                 <AppBar className={classes.appBar}>
                     <Toolbar>
                         <IconButton
@@ -93,7 +65,7 @@ class ResponsiveDrawer extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap>
-                            Course Name
+                            {sessionStorage.getItem("courseName")}
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -110,7 +82,7 @@ class ResponsiveDrawer extends Component {
                             keepMounted: true
                         }}
                     >
-                        {drawer}
+                        <CourseContent/>
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
@@ -121,7 +93,7 @@ class ResponsiveDrawer extends Component {
                             paper: classes.drawerPaper,
                         }}
                     >
-                        {drawer}
+                        <CourseContent/>
                     </Drawer>
                 </Hidden>
                 <main className={classes.content}>
@@ -133,9 +105,9 @@ class ResponsiveDrawer extends Component {
     }
 }
 
-ResponsiveDrawer.propTypes = {
+CourseView.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(CourseView);

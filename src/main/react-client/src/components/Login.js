@@ -19,7 +19,6 @@ class Login extends Component {
     componentDidMount() {
         axios.get("/api/courses")
             .then(result => {
-                console.log("call courses");
                 const courses = result.data;
                 this.setState({courses});
             })
@@ -35,7 +34,9 @@ class Login extends Component {
     logIn = () => {
         axios.get("/api/login/" + this.state.username + "/course/" + this.state.courseName)
             .then(result => {
-                sessionStorage.setItem("username", result.data);
+                sessionStorage.setItem("username", this.state.username);
+                sessionStorage.setItem("courseName", this.state.courseName);
+                sessionStorage.setItem("lastLesson", result.data);
                 this.props.history.push("/course/" + this.state.courseName);
             })
             .catch(error => console.log(error));

@@ -11,7 +11,7 @@ class NotFound extends Component {
                         Ошибка
                     </Typography>
                     <Typography variant="headline" component="h2">
-                        4{bull}0{bull}4{bull}
+                        4{bull}0{bull}4
                     </Typography>
                     <Typography className="pos" color="textSecondary">
                         Значение:

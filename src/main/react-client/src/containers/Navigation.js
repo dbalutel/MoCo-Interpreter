@@ -5,9 +5,11 @@ import Card from "material-ui/Card/Card";
 class Navigation extends Component {
     render() {
         return (
-            <Card className="card-selector">
-                {this.props.content}
-            </Card>
+            <div className="card-selector">
+                <Card>
+                    {this.props.content}
+                </Card>
+            </div>
         );
     }
 }
