@@ -2,6 +2,8 @@ package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.StartUp;
+import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.MatchResult;
@@ -12,9 +14,12 @@ import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 @Service
 public class StartUpBuilder {
 
-    public StartUp extractStartUp(String reducedLines) {
+    @Autowired
+    private MediaDataParser mediaDataParser;
+
+    public StartUp extractStartUp(String reducedLines, CourseFolder courseFolder) {
         StartUp startUp = new StartUp();
-        startUp.setStartUpText(extractText(reducedLines));
+        startUp.setStartUpText(mediaDataParser.parseMedia(extractText(reducedLines), courseFolder));
         return startUp;
     }
 

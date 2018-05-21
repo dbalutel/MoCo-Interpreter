@@ -1,6 +1,6 @@
 package md.balutsel.mocointerpreter.backend.controller;
 
-import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessontDto;
+import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
 import md.balutsel.mocointerpreter.backend.service.CourseService;
 import md.balutsel.mocointerpreter.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,10 @@ public class CourseController {
 
     @GetMapping("/api/courses/{courseName}/lessons")
     @ResponseBody
-    public List<CourseLessontDto> getCourseLessons(@PathVariable String courseName) {
+    public List<CourseLessonDto> getCourseLessons(@PathVariable String courseName) {
         return courseService.getAllCourseLessonNames(courseName)
                 .stream()
-                .map(CourseLessontDto::new)
+                .map(CourseLessonDto::new)
                 .collect(Collectors.toList());
     }
 }

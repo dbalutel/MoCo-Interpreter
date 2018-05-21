@@ -48,11 +48,11 @@ public final class FileLoader {
         String fileName = file.getName();
 
         if (fileName.endsWith(JPG)) {
-            courseFolder.getImages().put(fileName, file);
+            courseFolder.getImages().put(fileName.replaceAll(JPG, ""), file);
         } else if (fileName.endsWith(MP3)) {
-            courseFolder.getMusic().put(fileName, file);
+            courseFolder.getMusic().put(fileName.replaceAll(MP3, ""), file);
         } else if (fileName.endsWith(MP4)) {
-            courseFolder.getVideos().put(fileName, file);
+            courseFolder.getVideos().put(fileName.replaceAll(MOC, ""), file);
         } else if (fileName.endsWith(MOC)) {
             courseFolder.setMocCourse(file);
         }

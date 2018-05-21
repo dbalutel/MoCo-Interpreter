@@ -4,11 +4,11 @@ import lombok.Data;
 import md.balutsel.mocointerpreter.engine.model.Lesson;
 
 @Data
-public class CourseLessontDto {
+public class CourseLessonDto {
     private int lessonNumber;
     private String lessonName;
 
-    public CourseLessontDto(Lesson lesson) {
+    public CourseLessonDto(Lesson lesson) {
         this.lessonNumber = lesson.getNumber();
         this.lessonName = lesson.getName();
     }

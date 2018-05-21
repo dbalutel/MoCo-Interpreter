@@ -42,8 +42,8 @@ public final class CourseBuilder {
 
             Course course = new Course();
             course.setCourseName(extractCourseName(fileLines));
-            course.setStartUp(startUpBuilder.extractStartUp(reducedLines));
-            course.setLessons(lessonBuilder.extractLessons(reducedLines));
+            course.setStartUp(startUpBuilder.extractStartUp(reducedLines, courseFolder));
+            course.setLessons(lessonBuilder.extractLessons(reducedLines, courseFolder));
 
             return course;
         } catch (IOException e) {

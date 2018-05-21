@@ -1,11 +1,14 @@
 package md.balutsel.mocointerpreter.engine;
 
 import md.balutsel.mocointerpreter.engine.model.Course;
+import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import md.balutsel.mocointerpreter.engine.service.CourseBuilder;
 import md.balutsel.mocointerpreter.engine.service.FileLoader;
+import md.balutsel.mocointerpreter.engine.service.MediaDataParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service

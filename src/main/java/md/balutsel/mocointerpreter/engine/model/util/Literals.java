@@ -31,4 +31,8 @@ public class Literals {
     public static final String FREE_QUESTION = "_Free";
     public static final String SINGLE_QUESTION = "_Single";
     public static final String MULTIPLE_QUESTION = "_Multiple";
+
+    public static final String AUDIO_LITERAL = "\\|\\s*\\*\\s*Audio\\s*=\\s*\\d+\\.mp3\\s*\\*\\s*\\|";
+    public static final String VIDEO_LITERAL = "\\|\\s*\\*\\s*Video\\s*=\\s*\\d+\\.mp4\\s*\\*\\s*\\|";
+    public static final String IMAGE_LITERAL = "\\|\\s*\\*\\s*Image\\s*=\\s*\\d+\\.jpg\\s*\\*\\s*\\|";
 }

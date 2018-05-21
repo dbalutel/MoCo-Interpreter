@@ -2,6 +2,7 @@ package md.balutsel.mocointerpreter.engine.service;
 
 import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.Lesson;
+import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,24 +22,27 @@ public class LessonBuilder {
     @Autowired
     private TestBuilder testBuilder;
 
-    public List<Lesson> extractLessons(String reducedLines) {
+    @Autowired
+    private MediaDataParser mediaDataParser;
+
+    public List<Lesson> extractLessons(String reducedLines, CourseFolder courseFolder) {
         return Pattern.compile(LESSON_SECTION)
                 .matcher(reducedLines)
                 .results()
                 .map(MatchResult::group)
                 .parallel()
-                .map(this::buildLesson)
+                .map(line -> buildLesson(line, courseFolder))
                 .collect(Collectors.toList());
     }
 
-    private Lesson buildLesson(String lessonString) {
+    private Lesson buildLesson(String lessonString, CourseFolder courseFolder) {
         List<String> lessonLines = new ArrayList<>(List.of(lessonString.split("\n")));
 
         Lesson lesson = new Lesson();
         lesson.setNumber(extractLessonNumber(lessonLines.get(0)));
         lesson.setName(extractLessonName(lessonLines.get(0)));
         lesson.setRequiredToAccess(extractRequiredToAccess(lessonLines.get(0)));
-        lesson.setInformation(extractInformation(lessonString));
+        lesson.setInformation(mediaDataParser.parseMedia(extractInformation(lessonString), courseFolder));
         lesson.setTest(testBuilder.extractTest(lessonString));
 
         return lesson;

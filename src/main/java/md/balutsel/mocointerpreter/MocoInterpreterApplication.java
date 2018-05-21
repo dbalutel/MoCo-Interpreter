@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 // TODO Question creation + diagnosis parse
 // TODO Edit literal
 // TODO UI
+// TODO Start Up Page
 // TODO replace all media tags
 // TODO persistence + relation
 // TODO backend services
