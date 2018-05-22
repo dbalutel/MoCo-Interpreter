@@ -38,7 +38,7 @@ public class LessonBuilder {
     private Lesson buildLesson(String lessonString, CourseFolder courseFolder) {
         List<String> lessonLines = new ArrayList<>(List.of(lessonString.split("\n")));
 
-        Lesson lesson = new Lesson();
+        var lesson = new Lesson();
         lesson.setNumber(extractLessonNumber(lessonLines.get(0)));
         lesson.setName(extractLessonName(lessonLines.get(0)));
         lesson.setRequiredToAccess(extractRequiredToAccess(lessonLines.get(0)));
@@ -50,7 +50,7 @@ public class LessonBuilder {
 
     private int extractLessonNumber(String line) {
         if (line.matches(LESSON_START_LITERAL)) {
-            String number = line.chars()
+            var number = line.chars()
                     .dropWhile(c -> !Character.isDigit(c))
                     .takeWhile(Character::isDigit)
                     .mapToObj(i -> String.valueOf((char) i))
@@ -78,7 +78,7 @@ public class LessonBuilder {
         if (line.matches(LESSON_START_LITERAL)) {
             Set<Integer> requiredLessonsList = new HashSet<>();
 
-            String requiredLessons = line.chars()
+            var requiredLessons = line.chars()
                     .mapToObj(i -> String.valueOf((char) i))
                     .dropWhile(s -> !s.equals("["))
                     .skip(1)
@@ -86,7 +86,7 @@ public class LessonBuilder {
                     .filter(s -> !s.equals(" "))
                     .collect(Collectors.joining(""));
 
-            String[] splicedLessons = requiredLessons.split(",");
+            var splicedLessons = requiredLessons.split(",");
 
             for (String interval : splicedLessons) {
                 if(interval.matches("^\\d+$")) {

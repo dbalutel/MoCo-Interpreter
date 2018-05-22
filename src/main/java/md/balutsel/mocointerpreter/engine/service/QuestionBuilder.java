@@ -30,16 +30,16 @@ public class QuestionBuilder {
     private Question buildQuestion(String questionString) {
         List<String> questionLines = new ArrayList<>(List.of(questionString.split("\n")));
 
-        String questionStart = questionLines.get(0);
+        var questionStart = questionLines.get(0);
         if (questionStart.matches(QUESTION_START_LITERAL)) {
             if (questionStart.contains(FREE_QUESTION)) {
-                FreeQuestion freeQuestion = new FreeQuestion();
+                var freeQuestion = new FreeQuestion();
                 return freeQuestion;
             } else if (questionStart.contains(SINGLE_QUESTION)) {
-                SingleQuestion singleQuestion = new SingleQuestion();
+                var singleQuestion = new SingleQuestion();
                 return singleQuestion;
             } else  {
-                MultipleQuestion multipleQuestion = new MultipleQuestion();
+                var multipleQuestion = new MultipleQuestion();
                 return multipleQuestion;
             }
         } else {

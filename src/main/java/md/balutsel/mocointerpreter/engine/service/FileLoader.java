@@ -45,7 +45,7 @@ public final class FileLoader {
     }
 
     private void mapCourseFolder(CourseFolder courseFolder, File file) {
-        String fileName = file.getName();
+        var fileName = file.getName();
 
         if (fileName.endsWith(JPG)) {
             courseFolder.getImages().put(fileName.replaceAll(JPG, ""), file);

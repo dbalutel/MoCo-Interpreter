@@ -32,15 +32,15 @@ public final class CourseBuilder {
 
     private Course parseMocFile(CourseFolder courseFolder) {
         try {
-            List<String> fileLines = Files.lines(Paths.get(courseFolder.getMocCourse().toURI()))
+            var fileLines = Files.lines(Paths.get(courseFolder.getMocCourse().toURI()))
                     .map(String::trim)
                     .filter(this::notComment)
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
 
-            String reducedLines = fileLines.parallelStream().collect(Collectors.joining("\n"));
+            var reducedLines = fileLines.parallelStream().collect(Collectors.joining("\n"));
 
-            Course course = new Course();
+            var course = new Course();
             course.setCourseName(extractCourseName(fileLines));
             course.setStartUp(startUpBuilder.extractStartUp(reducedLines, courseFolder));
             course.setLessons(lessonBuilder.extractLessons(reducedLines, courseFolder));

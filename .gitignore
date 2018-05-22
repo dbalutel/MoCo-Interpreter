@@ -8,7 +8,7 @@
 /src/main/resources/static
 /src/main/react-client/yarn-error.log
 
-### IntelliJ IDEA ###
+### Intellij IDEA ###
 .idea
 *.iws
 *.iml

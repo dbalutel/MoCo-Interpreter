@@ -26,11 +26,11 @@ public class MediaDataParser {
     }
 
     private String replaceAudio(String text, CourseFolder courseFolder) {
-        Map<String, String> audioLiterals = findImageLiterals(text);
+        Map<String, String> audioLiterals = findAudioLiterals(text);
 
-        Base64.Encoder encoder = Base64.getEncoder();
+        var encoder = Base64.getEncoder();
 
-        for (Map.Entry<String, String> audioLiteral : audioLiterals.entrySet()) {
+        for (var audioLiteral : audioLiterals.entrySet()) {
             try {
                 while (text.contains(audioLiteral.getValue())) {
                     text = text.replace(audioLiteral.getValue(), "<audio controls src=\"data:audio/mp3;base64," +
@@ -47,11 +47,11 @@ public class MediaDataParser {
     }
 
     private String replaceVideos(String text, CourseFolder courseFolder) {
-        Map<String, String> videoLiterals = findImageLiterals(text);
+        Map<String, String> videoLiterals = findVideoLiterals(text);
 
-        Base64.Encoder encoder = Base64.getEncoder();
+        var encoder = Base64.getEncoder();
 
-        for (Map.Entry<String, String> videoLiteral : videoLiterals.entrySet()) {
+        for (var videoLiteral : videoLiterals.entrySet()) {
             try {
                 while (text.contains(videoLiteral.getValue())) {
                     text = text.replace(videoLiteral.getValue(), "<video controls>" +
@@ -72,9 +72,9 @@ public class MediaDataParser {
 
         Map<String, String> imgLiterals = findImageLiterals(text);
 
-        Base64.Encoder encoder = Base64.getEncoder();
+        var encoder = Base64.getEncoder();
 
-        for (Map.Entry<String, String> imgLiteral : imgLiterals.entrySet()) {
+        for (var imgLiteral : imgLiterals.entrySet()) {
             try {
                 while (text.contains(imgLiteral.getValue())) {
                     text = text.replace(imgLiteral.getValue(), "<img src=\"data:image/png;base64," +
