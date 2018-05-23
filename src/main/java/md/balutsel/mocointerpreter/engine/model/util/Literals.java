@@ -40,11 +40,8 @@ public class Literals {
     public static final String AUDIO_LITERAL = "\\|\\s*\\*\\s*Audio\\s*=\\s*.*\\.mp3\\s*\\*\\s*\\|";
     public static final String VIDEO_LITERAL = "\\|\\s*\\*\\s*Video\\s*=\\s*.*\\.mp4\\s*\\*\\s*\\|";
     public static final String IMAGE_LITERAL = "\\|\\s*\\*\\s*Image\\s*=\\s*.*\\.jpg\\s*\\*\\s*\\|";
-    public static final String FONT_SIZE_LITERAL = "\\|\\s*\\*\\s*Size\\s*=\\s*\\d+\\.jpg\\s*\\*\\s*\\|";
+    public static final String FONT_SIZE_LITERAL = "\\|\\s*\\*\\s*Size\\s*=\\s*\\d+\\.jpg\\s*\\*\\s*>\\s*\\|";
     public static final String FONT_COLOR_LITERAL = "\\|\\s*\\*\\s*Font_Color\\s*=\\s*(Red|Green|Blue|Yellow|Black|White|Magenta|Brown|Cyan|Gray)\\s*\\*\\s*\\|";
-    public static final String FONT_BOLD = "\\|\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*\\|";
-    public static final String FONT_ITALIC = "\\|\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*\\|";
-    public static final String FONT_UNDERSCORE = "\\|\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|";
 
     public static final List<ParseMediaElement> MEDIA_PARSE_ELEMENTS = List.of(
             ParseMediaElement.builder()
@@ -89,23 +86,22 @@ public class Literals {
                     .leftLiteral("\\|\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*>\\s*\\|")
                     .rightLiteral("\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|")
                     .build()
-//            ParseMediaElement.builder()
-//                    .leftPartHtmlReplacement("<span style=\"font-size:")
-//                    .rightPartHtmlReplacement("</span>")
-//                    .literal(FONT_SIZE_LITERAL)
-//                    .literalLeftPartReplacement("\\|\\s*\\*\\s*FONT\\s*=\\s*I\\s*\\*\\s*\\|")
-//                    .literalRightPartReplacement("")
-//                    .build(),
-//            ParseMediaElement.builder()
-//                    .leftPartHtmlReplacement("<span style=\"color:")
-//                    .rightPartHtmlReplacement("</span>")
-//                    .literal(FONT_COLOR_LITERAL)
-//                    .literalLeftPartReplacement("\\|\\s*\\*\\s*FONT\\s*=\\s*U\\s*\\*\\s*\\|")
-//                    .literalRightPartReplacement("")
-//                    .build()
     );
 
-   // public static final List<>
+    public static final List<ParseTextElement> FONT_PARSE_ELEMENTS = List.of(
+            ParseTextElement.builder()
+                    .leftPartHtmlReplacement("<span style=\"font-size:")
+                    .rightPartHtmlReplacement("</span>")
+                    .leftLiteral("\\|\\s*\\*\\s*Size\\s*=\\s*\\d+\\s*\\*\\s*>\\s*\\|")
+                    .rightLiteral("\\|\\s*<\\s*\\*\\s*Size\\s*=\\s*\\d+\\s*\\*\\s*\\|")
+                    .build(),
+            ParseTextElement.builder()
+                    .leftPartHtmlReplacement("<span style=\"color:")
+                    .rightPartHtmlReplacement("</span>")
+                    .leftLiteral("\\|\\s*\\*\\s*Font_Color\\s*=\\s*(Red|Green|Blue|Yellow|Black|White|Magenta|Brown|Cyan|Gray)\\s*\\*\\s*>\\s*\\|")
+                    .rightLiteral("\\|\\s*<\\s*\\*\\s*Font_Color\\s*=\\s*(Red|Green|Blue|Yellow|Black|White|Magenta|Brown|Cyan|Gray)\\s*\\*\\s*\\|")
+                    .build()
+    );
 
     @Data
     @Builder
@@ -116,7 +112,6 @@ public class Literals {
         private String literalLeftPartReplacement;
         private String literalRightPartReplacement;
     }
-
 
     @Data
     @Builder

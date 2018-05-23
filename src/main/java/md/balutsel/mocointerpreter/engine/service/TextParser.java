@@ -27,11 +27,13 @@ public class TextParser {
         for (var parseElement : Literals.TEXT_PARSE_ELEMENTS) {
             text = parseText(text, parseElement);
         }
+        for (var parseElement : Literals.FONT_PARSE_ELEMENTS) {
+            text = parseFont(text, parseElement);
+        }
         return text;
     }
 
     private String parseMedia(String text, CourseFolder courseFolder, ParseMediaElement parseMediaElement) {
-
         Map<String, String> literals = findMediaLiterals(text, parseMediaElement);
 
         var encoder = Base64.getEncoder();
@@ -46,7 +48,6 @@ public class TextParser {
                 e.printStackTrace();
             }
         }
-
         return text;
     }
 
@@ -63,5 +64,40 @@ public class TextParser {
     private String parseText(String text, ParseTextElement parseMediaElement) {
         return text.replaceAll(parseMediaElement.getLeftLiteral(), parseMediaElement.getLeftPartHtmlReplacement())
                 .replaceAll(parseMediaElement.getRightLiteral(), parseMediaElement.getRightPartHtmlReplacement());
+    }
+
+    private String parseFont(String text, ParseTextElement parseTextElement) {
+        var leftPart = findFontLiteral(text, parseTextElement.getLeftLiteral());
+        var rightPart = findFontLiteral(text, parseTextElement.getRightLiteral());
+
+        for (var literalPart : leftPart.entrySet()) {
+            text = text.replaceAll(Pattern.quote(literalPart.getKey()),
+                    parseTextElement.getLeftPartHtmlReplacement() + literalPart.getValue() + "px" + "\">");
+        }
+
+        for (var literalPart : rightPart.entrySet()) {
+            text = text.replaceAll(Pattern.quote(literalPart.getKey()),
+                    parseTextElement.getRightPartHtmlReplacement());
+        }
+        return text;
+    }
+
+    private Map<String, String> findFontLiteral(String text, String parseFontElement) {
+        return Pattern.compile(parseFontElement)
+                .matcher(text)
+                .results()
+                .map(MatchResult::group)
+                .distinct()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        literal -> literal.chars()
+                                .parallel()
+                                .mapToObj(i -> String.valueOf((char) i))
+                                .dropWhile(s -> !s.equals("="))
+                                .skip(1)
+                                .takeWhile(s -> !s.equals("*"))
+                                .collect(Collectors.joining())
+                                .trim()
+                                .toLowerCase()));
     }
 }
