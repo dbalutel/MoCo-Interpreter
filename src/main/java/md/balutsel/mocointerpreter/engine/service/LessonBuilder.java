@@ -23,7 +23,7 @@ public class LessonBuilder {
     private TestBuilder testBuilder;
 
     @Autowired
-    private MediaDataParser mediaDataParser;
+    private TextParser textParser;
 
     public List<Lesson> extractLessons(String reducedLines, CourseFolder courseFolder) {
         return Pattern.compile(LESSON_SECTION)
@@ -42,7 +42,7 @@ public class LessonBuilder {
         lesson.setNumber(extractLessonNumber(lessonLines.get(0)));
         lesson.setName(extractLessonName(lessonLines.get(0)));
         lesson.setRequiredToAccess(extractRequiredToAccess(lessonLines.get(0)));
-        lesson.setInformation(mediaDataParser.parseMedia(extractInformation(lessonString), courseFolder));
+        lesson.setInformation(textParser.parse(extractInformation(lessonString), courseFolder));
         lesson.setTest(testBuilder.extractTest(lessonString));
 
         return lesson;

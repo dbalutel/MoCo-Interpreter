@@ -15,11 +15,11 @@ import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 public class StartUpBuilder {
 
     @Autowired
-    private MediaDataParser mediaDataParser;
+    private TextParser textParser;
 
     public StartUp extractStartUp(String reducedLines, CourseFolder courseFolder) {
         StartUp startUp = new StartUp();
-        startUp.setStartUpText(mediaDataParser.parseMedia(extractText(reducedLines), courseFolder));
+        startUp.setStartUpText(textParser.parse(extractText(reducedLines), courseFolder));
         return startUp;
     }
 

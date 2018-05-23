@@ -1,5 +1,10 @@
 package md.balutsel.mocointerpreter.engine.model.util;
 
+import lombok.Builder;
+import lombok.Data;
+
+import java.util.List;
+
 public class Literals {
     public static final String COMMENT = "@";
 
@@ -32,7 +37,93 @@ public class Literals {
     public static final String SINGLE_QUESTION = "_Single";
     public static final String MULTIPLE_QUESTION = "_Multiple";
 
-    public static final String AUDIO_LITERAL = "\\|\\s*\\*\\s*Audio\\s*=\\s*\\d+\\.mp3\\s*\\*\\s*\\|";
-    public static final String VIDEO_LITERAL = "\\|\\s*\\*\\s*Video\\s*=\\s*\\d+\\.mp4\\s*\\*\\s*\\|";
-    public static final String IMAGE_LITERAL = "\\|\\s*\\*\\s*Image\\s*=\\s*\\d+\\.jpg\\s*\\*\\s*\\|";
+    public static final String AUDIO_LITERAL = "\\|\\s*\\*\\s*Audio\\s*=\\s*.*\\.mp3\\s*\\*\\s*\\|";
+    public static final String VIDEO_LITERAL = "\\|\\s*\\*\\s*Video\\s*=\\s*.*\\.mp4\\s*\\*\\s*\\|";
+    public static final String IMAGE_LITERAL = "\\|\\s*\\*\\s*Image\\s*=\\s*.*\\.jpg\\s*\\*\\s*\\|";
+    public static final String FONT_SIZE_LITERAL = "\\|\\s*\\*\\s*Size\\s*=\\s*\\d+\\.jpg\\s*\\*\\s*\\|";
+    public static final String FONT_COLOR_LITERAL = "\\|\\s*\\*\\s*Font_Color\\s*=\\s*(Red|Green|Blue|Yellow|Black|White|Magenta|Brown|Cyan|Gray)\\s*\\*\\s*\\|";
+    public static final String FONT_BOLD = "\\|\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*\\|";
+    public static final String FONT_ITALIC = "\\|\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*\\|";
+    public static final String FONT_UNDERSCORE = "\\|\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*>\\s*\\|\\n*(.*\\n|.*)((?!\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|).*\\n.*\\n|.*)\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|";
+
+    public static final List<ParseMediaElement> MEDIA_PARSE_ELEMENTS = List.of(
+            ParseMediaElement.builder()
+                    .leftPartHtmlReplacement("<audio controls src=\"data:audio/mp3;base64,")
+                    .rightPartHtmlReplacement("\"/>")
+                    .literal(AUDIO_LITERAL)
+                    .literalLeftPartReplacement("\\|\\s*\\*\\s*Audio\\s*=\\s*")
+                    .literalRightPartReplacement("\\.mp3\\s*\\*\\s*\\|")
+                    .build(),
+            ParseMediaElement.builder()
+                    .leftPartHtmlReplacement("<video controls><source type=\"video/mp4\" src=\"data:video/mp4;base64,")
+                    .rightPartHtmlReplacement("\"/>")
+                    .literal(VIDEO_LITERAL)
+                    .literalLeftPartReplacement("\\|\\s*\\*\\s*Video\\s*=\\s*")
+                    .literalRightPartReplacement("\\.mp4\\s*\\*\\s*\\|")
+                    .build(),
+            ParseMediaElement.builder()
+                    .leftPartHtmlReplacement("<img src=\"data:image/png;base64,")
+                    .rightPartHtmlReplacement("\" alt=\"Image\" />")
+                    .literal(IMAGE_LITERAL)
+                    .literalLeftPartReplacement("\\|\\s*\\*\\s*Image\\s*=\\s*")
+                    .literalRightPartReplacement("\\.jpg\\s*\\*\\s*\\|")
+                    .build()
+    );
+
+    public static final List<ParseTextElement> TEXT_PARSE_ELEMENTS = List.of(
+            ParseTextElement.builder()
+                    .leftPartHtmlReplacement("<b>")
+                    .rightPartHtmlReplacement("</b>")
+                    .leftLiteral("\\|\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*>\\s*\\|")
+                    .rightLiteral("\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*B\\s*\\*\\s*\\|")
+                    .build(),
+            ParseTextElement.builder()
+                    .leftPartHtmlReplacement("<i>")
+                    .rightPartHtmlReplacement("</i>")
+                    .leftLiteral("\\|\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*>\\s*\\|")
+                    .rightLiteral("\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*I\\s*\\*\\s*\\|")
+                    .build(),
+            ParseTextElement.builder()
+                    .leftPartHtmlReplacement("<u>")
+                    .rightPartHtmlReplacement("</u>")
+                    .leftLiteral("\\|\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*>\\s*\\|")
+                    .rightLiteral("\\|\\s*<\\s*\\*\\s*Font\\s*=\\s*U\\s*\\*\\s*\\|")
+                    .build()
+//            ParseMediaElement.builder()
+//                    .leftPartHtmlReplacement("<span style=\"font-size:")
+//                    .rightPartHtmlReplacement("</span>")
+//                    .literal(FONT_SIZE_LITERAL)
+//                    .literalLeftPartReplacement("\\|\\s*\\*\\s*FONT\\s*=\\s*I\\s*\\*\\s*\\|")
+//                    .literalRightPartReplacement("")
+//                    .build(),
+//            ParseMediaElement.builder()
+//                    .leftPartHtmlReplacement("<span style=\"color:")
+//                    .rightPartHtmlReplacement("</span>")
+//                    .literal(FONT_COLOR_LITERAL)
+//                    .literalLeftPartReplacement("\\|\\s*\\*\\s*FONT\\s*=\\s*U\\s*\\*\\s*\\|")
+//                    .literalRightPartReplacement("")
+//                    .build()
+    );
+
+   // public static final List<>
+
+    @Data
+    @Builder
+    public static final class ParseMediaElement {
+        private String leftPartHtmlReplacement;
+        private String rightPartHtmlReplacement;
+        private String literal;
+        private String literalLeftPartReplacement;
+        private String literalRightPartReplacement;
+    }
+
+
+    @Data
+    @Builder
+    public static final class ParseTextElement {
+        private String leftPartHtmlReplacement;
+        private String rightPartHtmlReplacement;
+        private String leftLiteral;
+        private String rightLiteral;
+    }
 }

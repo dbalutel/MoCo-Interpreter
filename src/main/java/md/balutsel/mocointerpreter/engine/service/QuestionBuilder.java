@@ -38,7 +38,7 @@ public class QuestionBuilder {
             } else if (questionStart.contains(SINGLE_QUESTION)) {
                 var singleQuestion = new SingleQuestion();
                 return singleQuestion;
-            } else  {
+            } else {
                 var multipleQuestion = new MultipleQuestion();
                 return multipleQuestion;
             }
