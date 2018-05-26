@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
@@ -25,20 +26,25 @@ public class TestBuilder {
                 .results()
                 .map(MatchResult::group)
                 .parallel()
-                .map(this::buildText)
+                .map(this::buildTest)
                 .findAny()
                 .orElse(null);
     }
 
-    private Test buildText(String testString) {
+    private Test buildTest(String testString) {
         List<String> testLines = new ArrayList<>(List.of(testString.split("\n")));
 
-        Test test = new Test();
+        var test = new Test();
         test.setName(extractTestName(testLines.get(0)));
         test.setInformation(extractTestInfo(testLines.get(0)));
         test.setParts(partBuilder.extractParts(testString));
+        test.setEvaluations(extractEvaluations(testLines));
 
         return test;
+    }
+
+    private Map<Integer, String> extractEvaluations(List<String> testLines) {
+        return null;
     }
 
     private String extractTestName(String line) {
@@ -51,7 +57,7 @@ public class TestBuilder {
 
     private String extractTestInfo(String line) {
         if (line.matches(TEST_START_LITERAL)) {
-                return line.substring(line.indexOf(")") + 1).trim();
+            return line.substring(line.indexOf(")") + 1).trim();
         } else {
             throw new GrammarException();
         }

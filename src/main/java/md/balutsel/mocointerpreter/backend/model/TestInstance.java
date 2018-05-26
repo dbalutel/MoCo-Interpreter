@@ -3,6 +3,8 @@ package md.balutsel.mocointerpreter.backend.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,5 +20,6 @@ public class TestInstance {
     @JoinColumn(name = "fk_course_instance", referencedColumnName = "id", nullable = false, updatable = false)
     private CourseInstance courseInstance;
 
-
+    @OneToMany(mappedBy = "test", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionInstance> questions = new ArrayList<>();
 }

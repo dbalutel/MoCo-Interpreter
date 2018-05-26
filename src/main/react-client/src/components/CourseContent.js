@@ -39,7 +39,8 @@ class CourseContent extends Component {
             listOfLessons.push(
                 <React.Fragment key={lesson.lessonNumber}>
                     <MenuItem divider className={classes.menuItem}>
-                        <ListItemText classes={{ primary: classes.primary }} primary={lesson.lessonNumber + ". " + lesson.lessonName}/>
+                        <ListItemText classes={{primary: classes.primary}}
+                                      primary={lesson.lessonNumber + ". " + lesson.lessonName}/>
                     </MenuItem>
                 </React.Fragment>
             )

@@ -4,18 +4,18 @@ import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import md.balutsel.mocointerpreter.engine.model.util.Literals;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.ParseMediaElement;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.ParseTextElement;
 
 @Service
 public class TextParser {

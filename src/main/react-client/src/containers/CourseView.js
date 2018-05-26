@@ -46,11 +46,11 @@ class CourseView extends Component {
     };
 
     handleDrawerToggle = () => {
-        this.setState({ mobileOpen: !this.state.mobileOpen });
+        this.setState({mobileOpen: !this.state.mobileOpen});
     };
 
     render() {
-        const { classes, theme } = this.props;
+        const {classes, theme} = this.props;
 
         return (
             <div className="root">
@@ -62,7 +62,7 @@ class CourseView extends Component {
                             onClick={this.handleDrawerToggle}
                             className={classes.navIconHide}
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap>
                             {sessionStorage.getItem("courseName")}
@@ -97,7 +97,7 @@ class CourseView extends Component {
                     </Drawer>
                 </Hidden>
                 <main className={classes.content}>
-                    <div className={classes.toolbar} />
+                    <div className={classes.toolbar}/>
                     <Typography noWrap>{'Some Text.'}</Typography>
                 </main>
             </div>
@@ -110,4 +110,4 @@ CourseView.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(CourseView);
+export default withStyles(styles, {withTheme: true})(CourseView);

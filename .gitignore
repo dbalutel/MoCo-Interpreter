@@ -14,5 +14,8 @@
 *.iml
 *.ipr
 
+### DB Error log ###
+db2.trace.db
+
 ### MacOs ###
 .DS_store
