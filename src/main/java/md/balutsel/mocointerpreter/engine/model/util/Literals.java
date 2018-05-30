@@ -27,11 +27,18 @@ public class Literals {
     public static final String TEST_START_LITERAL = "^_Test\\s*\\(\\s*\".*\"\\s*\\)\\s*.*$";
     public static final String TEST_SECTION = "_Test\\s*\\(\\s*\".*\"\\s*\\)\\s*.*\\n(.*\\n)((?!_End_of_Test).*\\n)*_End_of_Test";
 
+    public static final String TEST_EVALUATION_LITERAL = "_Evaluate\\s*\\(\\s*(\\s*(\\d+|\\d+\\.\\.\\d+|_Other))\\s*\\).*$";
+
     public static final String PART_START_LITERAL = "^_Part\\s*\\((\\d+|All)\\)$";
     public static final String PART_SECTION = "_Part\\s*\\((\\d+|All)\\)\\n(.*\\n)((?!_End_of_Part).*\\n)*_End_of_Part";
 
-    public static final String QUESTION_START_LITERAL = "^_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*$";
+    public static final String QUESTION_START_LITERAL = "^_Question\\s*\\(\\s*_(Single|Free|Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*$";
     public static final String QUESTION_SECTION = "_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*\\n((?!_End_of_Question).*\\n)*_End_of_Question";
+
+    public static final String HELP_LITERAL = "^\\s*\\$\\s*\\(\\s*_Help\\s*\\).*$";
+    public static final String EXCEED_LITERAL = "^\\s*\\$\\s*\\(\\s*_Exceed\\s*\\).*$";
+    public static final String CORRECT_LITERAL = "^\\s*\\$\\s*\\(\\s*_Correct\\s*\\).*$";
+    public static final String WRONG_LITERAL = "^\\s*\\$\\s*\\(\\s*_Wrong\\s*\\).*$";
 
     public static final String FREE_QUESTION = "_Free";
     public static final String SINGLE_QUESTION = "_Single";

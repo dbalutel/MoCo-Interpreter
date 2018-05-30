@@ -3,6 +3,7 @@ package md.balutsel.mocointerpreter.engine.model;
 import lombok.Data;
 
 @Data
-public class Answer {
-
+public abstract class Answer {
+    private boolean isCorrect;
+    private String text;
 }

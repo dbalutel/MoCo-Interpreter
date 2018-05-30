@@ -22,19 +22,16 @@ public class CourseController {
     private UserService userService;
 
     @GetMapping("/api/login/{username}/course/{courseName}")
-    @ResponseBody
     public String logIn(@PathVariable String username, @PathVariable String courseName) {
         return userService.logIn(username, courseName);
     }
 
     @GetMapping("/api/courses")
-    @ResponseBody
     public List<String> getAllCoursesNames() {
         return courseService.getAllCoursesNames();
     }
 
     @GetMapping("/api/courses/{courseName}/lessons")
-    @ResponseBody
     public List<CourseLessonDto> getCourseLessons(@PathVariable String courseName) {
         return courseService.getAllCourseLessonNames(courseName)
                 .stream()
