@@ -37,8 +37,6 @@ public final class Literals {
 
     public static final String HELP_LITERAL = "^\\s*\\$\\s*\\(\\s*_Help\\s*\\).*$";
     public static final String EXCEED_LITERAL = "^\\s*\\$\\s*\\(\\s*_Exceed\\s*\\).*$";
-    public static final String CORRECT_LITERAL = "^\\s*\\$\\s*\\(\\s*_Correct\\s*\\).*$";
-    public static final String WRONG_LITERAL = "^\\s*\\$\\s*\\(\\s*_Wrong\\s*\\).*$";
 
     public static final String FREE_QUESTION = "_Free";
     public static final String SINGLE_QUESTION = "_Single";
@@ -52,22 +50,22 @@ public final class Literals {
 
     public static final List<ParseMediaElement> MEDIA_PARSE_ELEMENTS = List.of(
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<audio controls src=\"data:audio/mp3;base64,")
-                    .rightPartHtmlReplacement("\"/>")
+                    .leftPartHtmlReplacement("<div><audio controls src=\"data:audio/mp3;base64,")
+                    .rightPartHtmlReplacement("\"/></div>")
                     .literal(AUDIO_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Audio\\s*=\\s*")
                     .literalRightPartReplacement("\\.mp3\\s*\\*\\s*\\|")
                     .build(),
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<video controls><source type=\"video/mp4\" src=\"data:video/mp4;base64,")
-                    .rightPartHtmlReplacement("\"/>")
+                    .leftPartHtmlReplacement("<div><video controls><source type=\"video/mp4\" src=\"data:video/mp4;base64,")
+                    .rightPartHtmlReplacement("\"/></div>")
                     .literal(VIDEO_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Video\\s*=\\s*")
                     .literalRightPartReplacement("\\.mp4\\s*\\*\\s*\\|")
                     .build(),
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<img src=\"data:image/png;base64,")
-                    .rightPartHtmlReplacement("\" alt=\"Image\" />")
+                    .leftPartHtmlReplacement("<div><img src=\"data:image/png;base64,")
+                    .rightPartHtmlReplacement("\" alt=\"Image\" /></div>")
                     .literal(IMAGE_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Image\\s*=\\s*")
                     .literalRightPartReplacement("\\.jpg\\s*\\*\\s*\\|")
@@ -115,6 +113,9 @@ public final class Literals {
     public static final String SINGLE_FREE_CORRECT_ANSWER = "\\$\\s*\\(\\s*_Correct\\s*,\\s*\\d+\\s*\\)\\s*.*";
     public static final String ANSWER_REACTION = "\\$\\s*\\(\\s*_Reaction\\s*\\)\\s*.*";
     public static final String UNDEFINED_ANSWER = "\\$\\s*\\(\\s*_Undefined\\s*\\)\\s*.*";
+    public static final String MULTIPLE_WRONG_ANSWER = "^\\s*\\$\\s*\\(\\s*_Wrong\\s*\\).*$";
+    public static final String MULTIPLE_CORRECT_ANSWER= "^\\s*\\$\\s*\\(\\s*_Correct\\s*\\).*$";
+
 
     @Data
     @Builder

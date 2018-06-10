@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import CourseContent from "../components/CourseContent";
+import StartupDialog from "../components/StartupDialog";
 
 const drawerWidth = 240;
 
@@ -98,6 +99,7 @@ class CourseView extends Component {
                 </Hidden>
                 <main className={classes.content}>
                     <div className={classes.toolbar}/>
+                    <StartupDialog/>
                     <Typography noWrap>{'Some Text.'}</Typography>
                 </main>
             </div>

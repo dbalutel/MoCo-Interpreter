@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.ANSWER_REACTION;
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.SINGLE_FREE_CORRECT_ANSWER;
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.SINGLE_FREE_WRONG_ANSWER;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 
 @Service
 public class AnswerBuilder {
@@ -25,7 +23,7 @@ public class AnswerBuilder {
                     answer.setReaction(extractReaction(questionLines.get(i+1)));
                 }
             } else if (questionLines.get(i).matches(SINGLE_FREE_CORRECT_ANSWER)) {
-                var answer = buildFreeAnswer(questionLines.get(i), false);
+                var answer = buildFreeAnswer(questionLines.get(i), true);
                 answers.add(answer);
                 if (questionLines.get(i+1).matches(ANSWER_REACTION)) {
                     answer.setReaction(extractReaction(questionLines.get(i+1)));
@@ -36,7 +34,7 @@ public class AnswerBuilder {
         return answers;
     }
 
-    public List<Answer> fromSingleQuestion(List<String> questionLines) {
+    public List<Answer> createSingle(List<String> questionLines) {
         var answers = new ArrayList<Answer>();
 
         for (var i = 0; i < questionLines.size() - 1; i++) {
@@ -74,6 +72,13 @@ public class AnswerBuilder {
         return answer;
     }
 
+    private MultiAnswer buildMultiAnswer(String answerLine, boolean isValid) {
+        var answer = new MultiAnswer();
+        answer.setCorrect(isValid);
+        answer.setText(extractText(answerLine));
+        return answer;
+    }
+
     private int extractPoints(String line) {
         return Integer.parseInt(line.replaceAll("\\$\\s*\\(\\s*_(Wrong|Correct)\\s*,\\s*", "")
                 .replaceAll("\\s*\\)\\s*.*", ""));
@@ -89,6 +94,17 @@ public class AnswerBuilder {
 
     public List<Answer> createMultiple(List<String> questionLines) {
         var answers = new ArrayList<Answer>();
+
+        for (var i = 0; i < questionLines.size() - 1; i++) {
+            if (questionLines.get(i).matches(MULTIPLE_WRONG_ANSWER)) {
+                var answer = buildMultiAnswer(questionLines.get(i), false);
+                answers.add(answer);
+            } else if (questionLines.get(i).matches(MULTIPLE_CORRECT_ANSWER)) {
+                var answer = buildMultiAnswer(questionLines.get(i), true);
+                answers.add(answer);
+            }
+        }
+
         return answers;
     }
 }

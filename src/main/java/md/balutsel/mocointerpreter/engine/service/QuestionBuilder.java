@@ -41,12 +41,12 @@ public class QuestionBuilder {
                 var freeQuestion = new FreeQuestion();
                 setCommon(freeQuestion, questionLines);
                 freeQuestion.setAnswers(answerBuilder.createFree(questionLines));
-                freeQuestion.setUndefinedPhrase(extractExceedPhrase(questionLines));
+                freeQuestion.setUndefinedPhrase(extractUndefined(questionLines));
                 return freeQuestion;
             } else if (questionStart.contains(SINGLE_QUESTION)) {
                 var singleQuestion = new SingleQuestion();
                 setCommon(singleQuestion, questionLines);
-                singleQuestion.setAnswers(answerBuilder.fromSingleQuestion(questionLines));
+                singleQuestion.setAnswers(answerBuilder.createSingle(questionLines));
                 return singleQuestion;
             } else {
                 var multipleQuestion = new MultipleQuestion();
@@ -70,7 +70,7 @@ public class QuestionBuilder {
         return questionLines
                 .stream()
                 .filter(s -> s.matches(HELP_LITERAL))
-                .map(s -> s.replaceAll("\\$\\(_Help\\)\\s*", ""))
+                .map(s -> s.replaceAll("\\s*\\$\\s*\\(\\s*_Help\\s*\\)\\s*", ""))
                 .collect(Collectors.toList());
     }
 
@@ -106,7 +106,7 @@ public class QuestionBuilder {
                 .filter(s -> s.matches(QUESTION_START_LITERAL))
                 .findAny()
                 .orElseThrow(GrammarException::new)
-                .replaceAll("_Question\\s*\\(_(Free|Multiple|Single),\\s*", "")
+                .replaceAll("_Question\\s*\\(_(Free|Multiple|Single)\\s*,\\s*", "")
                 .replaceAll("\\).*", ""));
     }
 }

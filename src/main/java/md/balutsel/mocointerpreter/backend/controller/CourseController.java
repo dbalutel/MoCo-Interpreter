@@ -3,6 +3,7 @@ package md.balutsel.mocointerpreter.backend.controller;
 import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
 import md.balutsel.mocointerpreter.backend.service.CourseService;
 import md.balutsel.mocointerpreter.backend.service.UserService;
+import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,5 +38,10 @@ public class CourseController {
                 .stream()
                 .map(CourseLessonDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/courses/{courseName}/startup")
+    public StartUp getCourseStartup(@PathVariable String courseName) {
+        return courseService.getStartup(courseName);
     }
 }

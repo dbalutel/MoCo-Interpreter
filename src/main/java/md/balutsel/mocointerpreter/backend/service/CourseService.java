@@ -4,6 +4,7 @@ import md.balutsel.mocointerpreter.engine.Engine;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
 import md.balutsel.mocointerpreter.engine.model.Course;
 import md.balutsel.mocointerpreter.engine.model.Lesson;
+import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,9 @@ public class CourseService {
         return engine.getCourses()
                 .stream()
                 .anyMatch(course -> course.getCourseName().equals(courseName));
+    }
+
+    public StartUp getStartup(String courseName) {
+        return getCourse(courseName).getStartUp();
     }
 }
