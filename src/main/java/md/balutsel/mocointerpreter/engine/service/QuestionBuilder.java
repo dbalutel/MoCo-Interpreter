@@ -40,18 +40,18 @@ public class QuestionBuilder {
             if (questionStart.contains(FREE_QUESTION)) {
                 var freeQuestion = new FreeQuestion();
                 setCommon(freeQuestion, questionLines);
-               // freeQuestion.setAnswers(answerBuilder.createFree());
-                answerBuilder.createFree(questionLines);
+                freeQuestion.setAnswers(answerBuilder.createFree(questionLines));
+                freeQuestion.setUndefinedPhrase(extractExceedPhrase(questionLines));
                 return freeQuestion;
             } else if (questionStart.contains(SINGLE_QUESTION)) {
                 var singleQuestion = new SingleQuestion();
                 setCommon(singleQuestion, questionLines);
-                singleQuestion.setAnswers(answerBuilder.forSingleQuestion(questionLines));
+                singleQuestion.setAnswers(answerBuilder.fromSingleQuestion(questionLines));
                 return singleQuestion;
             } else {
                 var multipleQuestion = new MultipleQuestion();
                 setCommon(multipleQuestion, questionLines);
-            //    multipleQuestion.setAnswers(answerBuilder.createMultiple(questionLines));
+                multipleQuestion.setAnswers(answerBuilder.createMultiple(questionLines));
                 return multipleQuestion;
             }
         } else {
@@ -89,6 +89,15 @@ public class QuestionBuilder {
                 .findAny()
                 .orElseThrow(GrammarException::new)
                 .replaceAll(".*\\)\\s*", "");
+    }
+
+    private String extractUndefined(List<String> lines) {
+        for (var line : lines) {
+            if (line.matches(UNDEFINED_ANSWER)) {
+                return line.replaceAll("\\$\\s*\\(\\s*_Undefined\\s*\\)\\s*", "");
+            }
+        }
+        return "";
     }
 
     private int extractNumberOfAttempts(List<String> questionLines) {

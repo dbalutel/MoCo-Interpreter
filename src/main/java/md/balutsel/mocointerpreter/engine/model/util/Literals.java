@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.List;
 
-public class Literals {
+public final class Literals {
     public static final String COMMENT = "@";
 
     public static final String COURSE_START_LITERAL = "^_Course\\s*\\(\\s*\".*\"\\s*\\)$";
@@ -109,6 +109,12 @@ public class Literals {
                     .rightLiteral("\\|\\s*<\\s*\\*\\s*Font_Color\\s*=\\s*(Red|Green|Blue|Yellow|Black|White|Magenta|Brown|Cyan|Gray)\\s*\\*\\s*\\|")
                     .build()
     );
+
+
+    public static final String SINGLE_FREE_WRONG_ANSWER = "\\$\\s*\\(\\s*_Wrong\\s*,\\s*-\\d+\\s*\\)\\s*.*";
+    public static final String SINGLE_FREE_CORRECT_ANSWER = "\\$\\s*\\(\\s*_Correct\\s*,\\s*\\d+\\s*\\)\\s*.*";
+    public static final String ANSWER_REACTION = "\\$\\s*\\(\\s*_Reaction\\s*\\)\\s*.*";
+    public static final String UNDEFINED_ANSWER = "\\$\\s*\\(\\s*_Undefined\\s*\\)\\s*.*";
 
     @Data
     @Builder

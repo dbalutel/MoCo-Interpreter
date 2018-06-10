@@ -1,13 +1,13 @@
 package md.balutsel.mocointerpreter.engine.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(exclude = {"answers"})
+@ToString(exclude = {"answers"})
 public abstract class Question {
     private String questionText;
 

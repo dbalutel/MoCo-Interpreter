@@ -6,4 +6,5 @@ import lombok.Data;
 public abstract class Answer {
     private boolean isCorrect;
     private String text;
+    private String reaction;
 }
