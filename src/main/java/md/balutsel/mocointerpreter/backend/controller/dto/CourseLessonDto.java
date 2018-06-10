@@ -7,9 +7,11 @@ import md.balutsel.mocointerpreter.engine.model.Lesson;
 public class CourseLessonDto {
     private int lessonNumber;
     private String lessonName;
+    private boolean isAccessible;
 
-    public CourseLessonDto(Lesson lesson) {
+    public CourseLessonDto(Lesson lesson, boolean isAccessible) {
         this.lessonNumber = lesson.getNumber();
         this.lessonName = lesson.getName();
+        this.isAccessible = isAccessible;
     }
 }

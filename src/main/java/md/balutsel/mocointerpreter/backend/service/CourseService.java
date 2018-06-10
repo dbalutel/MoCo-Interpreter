@@ -1,5 +1,7 @@
 package md.balutsel.mocointerpreter.backend.service;
 
+import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
+import md.balutsel.mocointerpreter.backend.repository.CourseRepository;
 import md.balutsel.mocointerpreter.engine.Engine;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
 import md.balutsel.mocointerpreter.engine.model.Course;
@@ -17,6 +19,9 @@ public class CourseService {
     @Autowired
     private Engine engine;
 
+    @Autowired
+    private CourseRepository courseRepository;
+
     public List<String> getAllCoursesNames() {
         return engine.getCourses()
                 .stream()
@@ -24,12 +29,26 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    public List<Lesson> getAllCourseLessonNames(String courseName) {
+    public List<CourseLessonDto> getAccessibleCourseLessonNames(String username, String courseName) {
+
+        List<Integer> visitedLessons = courseRepository.findByUsername(username).getVisitedLessons();
+
         return engine.getCourses().stream()
                 .filter(c -> c.getCourseName().equals(courseName))
                 .findFirst()
                 .map(Course::getLessons)
-                .orElseThrow(CourseNotFoundException::new);
+                .orElseThrow(CourseNotFoundException::new)
+                .stream()
+                .map(lesson -> {
+                    var isAvailable = true;
+                    for (var lessonNumber : lesson.getRequiredToAccess()) {
+                        if (!visitedLessons.contains(lessonNumber)) {
+                            isAvailable = false;
+                            break;
+                        }
+                    }
+                    return new CourseLessonDto(lesson, isAvailable);
+                }).collect(Collectors.toList());
 
     }
 

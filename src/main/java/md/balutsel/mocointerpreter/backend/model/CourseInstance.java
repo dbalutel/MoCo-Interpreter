@@ -1,6 +1,7 @@
 package md.balutsel.mocointerpreter.backend.model;
 
 import lombok.Data;
+import md.balutsel.mocointerpreter.backend.model.light.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class CourseInstance {
     @JoinColumn(name = "fk_user_name", referencedColumnName = "name", nullable = false, updatable = false)
     private User user;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "visited_lessons")
     private List<Integer> visitedLessons = new ArrayList<>();
 

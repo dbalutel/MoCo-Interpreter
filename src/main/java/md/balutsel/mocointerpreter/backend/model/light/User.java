@@ -1,7 +1,8 @@
-package md.balutsel.mocointerpreter.backend.model;
+package md.balutsel.mocointerpreter.backend.model.light;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import md.balutsel.mocointerpreter.backend.model.CourseInstance;
 
 import javax.persistence.*;
 import java.util.ArrayList;

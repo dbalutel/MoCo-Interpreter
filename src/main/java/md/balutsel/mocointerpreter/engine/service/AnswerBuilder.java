@@ -76,6 +76,11 @@ public class AnswerBuilder {
         var answer = new MultiAnswer();
         answer.setCorrect(isValid);
         answer.setText(extractText(answerLine));
+        if (isValid) {
+            answer.setScore(1);
+        } else {
+            answer.setScore(-1);
+        }
         return answer;
     }
 

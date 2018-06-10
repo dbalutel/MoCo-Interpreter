@@ -25,7 +25,7 @@ class CourseContent extends Component {
     };
 
     componentDidMount() {
-        axios.get("/api/courses/" + sessionStorage.getItem("courseName") + "/lessons")
+        axios.get("/api/" + sessionStorage.getItem("username") + "/courses/" + sessionStorage.getItem("courseName") + "/lessons")
             .then(result => {
                 const lessons = result.data;
                 this.setState({lessons});

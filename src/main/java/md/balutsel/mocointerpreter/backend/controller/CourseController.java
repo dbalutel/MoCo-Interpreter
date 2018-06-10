@@ -7,9 +7,9 @@ import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,12 +32,9 @@ public class CourseController {
         return courseService.getAllCoursesNames();
     }
 
-    @GetMapping("/api/courses/{courseName}/lessons")
-    public List<CourseLessonDto> getCourseLessons(@PathVariable String courseName) {
-        return courseService.getAllCourseLessonNames(courseName)
-                .stream()
-                .map(CourseLessonDto::new)
-                .collect(Collectors.toList());
+    @GetMapping("/api/{username}/courses/{courseName}/lessons")
+    public List<CourseLessonDto> getCourseLessons(@PathVariable String username, @PathVariable String courseName) {
+        return courseService.getAccessibleCourseLessonNames(username, courseName);
     }
 
     @GetMapping("/api/courses/{courseName}/startup")
