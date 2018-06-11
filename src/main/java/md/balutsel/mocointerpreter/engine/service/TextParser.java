@@ -1,5 +1,6 @@
 package md.balutsel.mocointerpreter.engine.service;
 
+import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.util.CourseFolder;
 import md.balutsel.mocointerpreter.engine.model.util.Literals;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,12 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.logging.Logger;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.ParseMediaElement;
-import static md.balutsel.mocointerpreter.engine.model.util.Literals.ParseTextElement;
+import static md.balutsel.mocointerpreter.engine.model.util.Literals.*;
 
 @Service
 public class TextParser {
@@ -40,12 +41,28 @@ public class TextParser {
 
         for (var literal : literals.entrySet()) {
             try {
-                text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
-                        encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getImages()
-                                .get(literal.getKey()).toURI()))) +
-                        parseMediaElement.getRightPartHtmlReplacement());
+                switch (parseMediaElement.getLiteral()) {
+                    case IMAGE_LITERAL:
+                        text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
+                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getImages()
+                                        .get(literal.getKey()).toURI()))) +
+                                parseMediaElement.getRightPartHtmlReplacement());
+                        break;
+                    case VIDEO_LITERAL:
+                        text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
+                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getVideos()
+                                        .get(literal.getKey() + ".mp4").toURI()))) +
+                                parseMediaElement.getRightPartHtmlReplacement());
+                        break;
+                    case AUDIO_LITERAL:
+                        text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
+                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getMusic()
+                                        .get(literal.getKey()).toURI()))) +
+                                parseMediaElement.getRightPartHtmlReplacement());
+                        break;
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new GrammarException();
             }
         }
         return text;

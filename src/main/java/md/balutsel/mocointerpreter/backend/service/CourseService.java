@@ -1,11 +1,10 @@
 package md.balutsel.mocointerpreter.backend.service;
 
 import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
-import md.balutsel.mocointerpreter.backend.repository.CourseRepository;
+import md.balutsel.mocointerpreter.backend.repository.CourseInstanceRepository;
 import md.balutsel.mocointerpreter.engine.Engine;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
 import md.balutsel.mocointerpreter.engine.model.Course;
-import md.balutsel.mocointerpreter.engine.model.Lesson;
 import md.balutsel.mocointerpreter.engine.model.StartUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class CourseService {
     private Engine engine;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseInstanceRepository courseInstanceRepository;
 
     public List<String> getAllCoursesNames() {
         return engine.getCourses()
@@ -31,7 +30,7 @@ public class CourseService {
 
     public List<CourseLessonDto> getAccessibleCourseLessonNames(String username, String courseName) {
 
-        List<Integer> visitedLessons = courseRepository.findByUsername(username).getVisitedLessons();
+        List<Integer> visitedLessons = courseInstanceRepository.findByUsername(username).getVisitedLessons();
 
         return engine.getCourses().stream()
                 .filter(c -> c.getCourseName().equals(courseName))

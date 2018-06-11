@@ -50,21 +50,21 @@ public final class Literals {
 
     public static final List<ParseMediaElement> MEDIA_PARSE_ELEMENTS = List.of(
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<div><audio controls src=\"data:audio/mp3;base64,")
+                    .leftPartHtmlReplacement("<div style=\"display:flex;justify-content:center\"><audio controls src=\"data:audio/mp3;base64,")
                     .rightPartHtmlReplacement("\"/></div>")
                     .literal(AUDIO_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Audio\\s*=\\s*")
                     .literalRightPartReplacement("\\.mp3\\s*\\*\\s*\\|")
                     .build(),
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<div><video controls><source type=\"video/mp4\" src=\"data:video/mp4;base64,")
+                    .leftPartHtmlReplacement("<div style=\"display:flex;justify-content:center\"><video controls><source type=\"video/mp4\" src=\"data:video/mp4;base64,")
                     .rightPartHtmlReplacement("\"/></div>")
                     .literal(VIDEO_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Video\\s*=\\s*")
                     .literalRightPartReplacement("\\.mp4\\s*\\*\\s*\\|")
                     .build(),
             ParseMediaElement.builder()
-                    .leftPartHtmlReplacement("<div><img src=\"data:image/png;base64,")
+                    .leftPartHtmlReplacement("<div style=\"display:flex;justify-content:center\"><img src=\"data:image/png;base64,")
                     .rightPartHtmlReplacement("\" alt=\"Image\" /></div>")
                     .literal(IMAGE_LITERAL)
                     .literalLeftPartReplacement("\\|\\s*\\*\\s*Image\\s*=\\s*")

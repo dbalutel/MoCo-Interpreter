@@ -16,7 +16,6 @@ class StartupDialog extends React.Component {
             .then(result => {
                 const startup = result.data.startUpText;
                 this.setState({startup});
-                console.log(startup);
             })
             .catch(error => console.log(error));
     }
