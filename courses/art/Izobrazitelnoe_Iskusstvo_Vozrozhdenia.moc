@@ -4,8 +4,6 @@
 _Start_Up
 |*Image = 1.jpg*|
 Учебный курс посвящён изобразительному искусству эпохи  |*Size = 14*>||*Font=B*>||*Font_Color = Red*>|Ренессанса|<*Font_Color = Red*||<*Font=B*||<*Size = 14*|.
-|*Audio = 1.mp3*|
-|*Video = 2.mp4*|
  _End_Start_Up
 _Lesson(1 "Введение")
 _Information

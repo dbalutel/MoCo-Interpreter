@@ -1,6 +1,9 @@
 package md.balutsel.mocointerpreter.backend.controller;
 
 import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
+import md.balutsel.mocointerpreter.backend.model.CourseInstance;
+import md.balutsel.mocointerpreter.backend.model.LessonInstance;
+import md.balutsel.mocointerpreter.backend.repository.CourseInstanceRepository;
 import md.balutsel.mocointerpreter.backend.service.CourseService;
 import md.balutsel.mocointerpreter.backend.service.UserService;
 import md.balutsel.mocointerpreter.engine.model.StartUp;
@@ -22,6 +25,9 @@ public class CourseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CourseInstanceRepository courseInstanceRepository;
+
     @GetMapping("/api/login/{username}/course/{courseName}")
     public String logIn(@PathVariable String username, @PathVariable String courseName) {
         return userService.logIn(username, courseName);
@@ -40,5 +46,10 @@ public class CourseController {
     @GetMapping("/api/courses/{courseName}/startup")
     public StartUp getCourseStartup(@PathVariable String courseName) {
         return courseService.getStartup(courseName);
+    }
+
+    @GetMapping("/demo")
+    public LessonInstance get() {
+        return courseInstanceRepository.findAll().get(0).getLessonInstances().get(0);
     }
 }

@@ -6,11 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface CourseInstanceRepository extends JpaRepository<CourseInstance, Long> {
-
     @Query("SELECT c " +
             "FROM CourseInstance c " +
-            "INNER JOIN FETCH c.user u " +
-            "WHERE u.name = :username")
-    CourseInstance findByUsername(@Param("username") String username);
-
+            "WHERE c.name = :courseName " +
+            "AND c.username = :username")
+    CourseInstance findByCourseNameAndUsername(@Param("courseName") String courseName, @Param("username") String username);
 }

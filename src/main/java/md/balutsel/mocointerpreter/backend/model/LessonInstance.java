@@ -30,8 +30,8 @@ public class LessonInstance {
     private String content;
 
     @ElementCollection
-    @Column(name = "required_to_visit")
-    private List<Integer> requiredToVisit = new ArrayList<>();
+    @Column(name = "required_to_access")
+    private List<Integer> requiredToAccess = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "fk_course_instance", referencedColumnName = "id", nullable = false, updatable = false)
@@ -41,4 +41,9 @@ public class LessonInstance {
     @OneToMany(mappedBy = "lessonInstance", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<TestInstance> testInstances = new ArrayList<>();
+
+    public void setTestInstances(List<TestInstance> testInstances) {
+        this.testInstances.addAll(testInstances);
+        testInstances.forEach(testInstance -> testInstance.setLessonInstance(this));
+    }
 }

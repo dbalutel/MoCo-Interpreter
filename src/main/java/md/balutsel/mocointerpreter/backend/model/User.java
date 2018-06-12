@@ -19,10 +19,6 @@ public class User {
     @Column(name = "name", columnDefinition = "varchar2(255)", updatable = false, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference("user")
-    private List<CourseInstance> courseInstances = new ArrayList<>();
-
     public User(String name) {
         this.name = name;
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios/index";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "material-ui";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "material-ui";
 
 class StartupDialog extends React.Component {
     state = {
@@ -31,9 +31,9 @@ class StartupDialog extends React.Component {
                 >
                     <DialogTitle id="alert-dialog-title">{sessionStorage.getItem("courseName")}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        <Typography>
                             <div dangerouslySetInnerHTML={{__html: this.state.startup}} />
-                        </DialogContentText>
+                        </Typography>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>

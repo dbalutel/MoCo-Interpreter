@@ -1,15 +1,16 @@
 package md.balutsel.mocointerpreter.backend.service;
 
 import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
+import md.balutsel.mocointerpreter.backend.model.*;
 import md.balutsel.mocointerpreter.backend.repository.CourseInstanceRepository;
 import md.balutsel.mocointerpreter.engine.Engine;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
-import md.balutsel.mocointerpreter.engine.model.Course;
-import md.balutsel.mocointerpreter.engine.model.StartUp;
+import md.balutsel.mocointerpreter.engine.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +22,9 @@ public class CourseService {
     @Autowired
     private CourseInstanceRepository courseInstanceRepository;
 
+    @Autowired
+    private LessonService lessonService;
+
     public List<String> getAllCoursesNames() {
         return engine.getCourses()
                 .stream()
@@ -30,7 +34,9 @@ public class CourseService {
 
     public List<CourseLessonDto> getAccessibleCourseLessonNames(String username, String courseName) {
 
-        List<Integer> visitedLessons = courseInstanceRepository.findByUsername(username).getVisitedLessons();
+        List<Integer> visitedLessons = courseInstanceRepository
+                .findByCourseNameAndUsername(courseName, username)
+                .getVisitedLessons();
 
         return engine.getCourses().stream()
                 .filter(c -> c.getCourseName().equals(courseName))
@@ -67,5 +73,16 @@ public class CourseService {
 
     public StartUp getStartup(String courseName) {
         return getCourse(courseName).getStartUp();
+    }
+
+    public void createCourseInstance(String username, String courseName) {
+        if (Objects.isNull(courseInstanceRepository.findByCourseNameAndUsername(courseName, username))) {
+            CourseInstance courseInstance = new CourseInstance();
+            courseInstance.setName(courseName);
+            courseInstance.setUsername(username);
+            Course course = getCourse(courseName);
+            courseInstance.setLessonInstances(lessonService.extractLessonInstances(course));
+            courseInstanceRepository.save(courseInstance);
+        }
     }
 }

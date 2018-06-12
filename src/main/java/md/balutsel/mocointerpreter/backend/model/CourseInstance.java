@@ -20,10 +20,8 @@ public class CourseInstance {
     @Column(name = "name", columnDefinition = "varchar2(50)")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_user_name", referencedColumnName = "name", nullable = false, updatable = false)
-    @JsonManagedReference("user")
-    private User user;
+    @Column(name = "username", columnDefinition = "varchar2(255)", updatable = false, nullable = false)
+    private String username;
 
     @ElementCollection
     @Column(name = "visited_lessons")
@@ -32,4 +30,14 @@ public class CourseInstance {
     @OneToMany(mappedBy = "courseInstance", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference("lesson")
     private List<LessonInstance> lessonInstances = new ArrayList<>();
+
+    public void addVisitedLesson(Integer lessonNumber) {
+        visitedLessons.add(lessonNumber);
+    }
+
+    public void setLessonInstances(List<LessonInstance> lessonInstances) {
+        this.lessonInstances.addAll(lessonInstances);
+        lessonInstances
+                .forEach(lessonInstance -> lessonInstance.setCourseInstance(this));
+    }
 }

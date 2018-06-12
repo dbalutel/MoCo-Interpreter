@@ -44,7 +44,6 @@ public class LessonBuilder {
         lesson.setRequiredToAccess(extractRequiredToAccess(lessonLines.get(0)));
         lesson.setInformation(textParser.parse(extractInformation(lessonString), courseFolder));
         lesson.setTest(testBuilder.extractTest(lessonString));
-
         return lesson;
     }
 
@@ -74,9 +73,9 @@ public class LessonBuilder {
         }
     }
 
-    private Set<Integer> extractRequiredToAccess(String line) {
+    private List<Integer> extractRequiredToAccess(String line) {
         if (line.matches(LESSON_START_LITERAL)) {
-            Set<Integer> requiredLessonsList = new HashSet<>();
+            var requiredLessonsList = new ArrayList<Integer>();
 
             var requiredLessons = line.chars()
                     .mapToObj(i -> String.valueOf((char) i))

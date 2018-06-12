@@ -19,9 +19,13 @@ public class UserService {
     @Transactional
     public String logIn(String username, String courseName) {
         if (courseService.existsByName(courseName)) {
-            return userRepository.findById(username)
+            String registeredUser =  userRepository.findById(username)
                     .orElseGet(() -> userRepository.save(new User(username)))
                     .getName();
+
+            courseService.createCourseInstance(username, courseName);
+
+            return registeredUser;
         } else {
             throw new CourseNotFoundException();
         }
