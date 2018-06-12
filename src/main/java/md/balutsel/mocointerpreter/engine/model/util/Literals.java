@@ -36,7 +36,8 @@ public final class Literals {
     public static final String QUESTION_SECTION = "_Question\\s*\\(\\s*(_Single|_Free|_Multiple)\\s*,\\s*\\d+\\s*\\)\\s*.*\\n((?!_End_of_Question).*\\n)*_End_of_Question";
 
     public static final String HELP_LITERAL = "^\\s*\\$\\s*\\(\\s*_Help\\s*\\).*$";
-    public static final String EXCEED_LITERAL = "^\\s*\\$\\s*\\(\\s*_Exceed\\s*\\).*$";
+    public static final String EXCEED_LITERAL = "^\\s*\\$\\s*\\(\\s*_eXceed\\s*\\).*$";
+    public static final String EXCEED_LITERAL_START = "\\s*\\$\\s*\\(\\s*_eXceed\\s*\\)\\s*";
 
     public static final String FREE_QUESTION = "_Free";
     public static final String SINGLE_QUESTION = "_Single";

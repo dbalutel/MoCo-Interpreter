@@ -6,5 +6,4 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MultiAnswer extends Answer {
-    private int score;
 }

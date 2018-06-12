@@ -21,6 +21,15 @@ public class AnswerInstance {
     @Column(name = "is_marked")
     private Boolean isMarked = false;
 
+    @Column(name = "is_correct")
+    private Boolean isCorrect;
+
+    @Column(name="reaction")
+    private String reaction;
+
+    @Column(name = "points")
+    private Integer points;
+
     @ManyToOne
     @JoinColumn(name = "fk_question_id", referencedColumnName = "id")
     @JsonBackReference

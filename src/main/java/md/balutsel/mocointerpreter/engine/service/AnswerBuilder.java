@@ -77,9 +77,9 @@ public class AnswerBuilder {
         answer.setCorrect(isValid);
         answer.setText(extractText(answerLine));
         if (isValid) {
-            answer.setScore(1);
+            answer.setPoints(1);
         } else {
-            answer.setScore(-1);
+            answer.setPoints(-1);
         }
         return answer;
     }
@@ -90,7 +90,8 @@ public class AnswerBuilder {
     }
 
     private String extractText(String line) {
-        return line.replaceAll("\\$\\s*\\(\\s*_(Wrong|Correct)\\s*,\\s*(-)*\\d+\\s*\\)\\s*", "");
+        return line.replaceAll("\\$\\s*\\(\\s*_(Wrong|Correct)\\s*,\\s*(-)*\\d+\\s*\\)\\s*", "")
+                .replaceAll("\\$\\s*\\(\\s*_(Wrong|Correct)\\s*\\)\\s*", "");
     }
 
     private String extractReaction(String line) {

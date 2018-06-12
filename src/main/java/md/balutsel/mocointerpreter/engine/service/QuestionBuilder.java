@@ -79,7 +79,8 @@ public class QuestionBuilder {
                 .stream()
                 .filter(s -> s.matches(EXCEED_LITERAL))
                 .findAny()
-                .orElse("");
+                .orElse("")
+                .replaceAll(EXCEED_LITERAL_START, "");
     }
 
     private String extractQuestionText(List<String> questionLines) {
