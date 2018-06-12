@@ -27,6 +27,9 @@ public class CourseInstance {
     @Column(name = "visited_lessons")
     private List<Integer> visitedLessons = new ArrayList<>();
 
+    @Column(name = "last_visited_lesson")
+    private Integer lastVisitedLesson = 1;
+
     @OneToMany(mappedBy = "courseInstance", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference("lesson")
     private List<LessonInstance> lessonInstances = new ArrayList<>();

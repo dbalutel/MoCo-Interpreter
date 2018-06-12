@@ -32,7 +32,7 @@ class Login extends Component {
             .then(result => {
                 sessionStorage.setItem("username", this.state.username);
                 sessionStorage.setItem("courseName", this.state.courseName);
-                sessionStorage.setItem("lastLesson", result.data);
+                sessionStorage.setItem("lastVisitedLesson", result.data.lastVisitedLesson);
                 this.props.history.push("/course/" + this.state.courseName);
             })
             .catch(error => console.log(error));

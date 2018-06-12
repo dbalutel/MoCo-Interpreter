@@ -5,6 +5,7 @@ import md.balutsel.mocointerpreter.backend.model.*;
 import md.balutsel.mocointerpreter.backend.repository.CourseInstanceRepository;
 import md.balutsel.mocointerpreter.engine.Engine;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
+import md.balutsel.mocointerpreter.engine.exceptions.GrammarException;
 import md.balutsel.mocointerpreter.engine.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,14 +76,27 @@ public class CourseService {
         return getCourse(courseName).getStartUp();
     }
 
-    public void createCourseInstance(String username, String courseName) {
-        if (Objects.isNull(courseInstanceRepository.findByCourseNameAndUsername(courseName, username))) {
+    public Integer getCourseInstance(String username, String courseName) {
+        CourseInstance fetchedCourseInstance = courseInstanceRepository.findByCourseNameAndUsername(courseName, username);
+        if (Objects.isNull(fetchedCourseInstance)) {
             CourseInstance courseInstance = new CourseInstance();
             courseInstance.setName(courseName);
             courseInstance.setUsername(username);
             Course course = getCourse(courseName);
             courseInstance.setLessonInstances(lessonService.extractLessonInstances(course));
             courseInstanceRepository.save(courseInstance);
+            return courseInstance.getLastVisitedLesson();
+        } else {
+            return fetchedCourseInstance.getLastVisitedLesson();
         }
+    }
+
+    public LessonInstance getLessonInstance(String username, String courseName, Integer lessonNumber) {
+        return courseInstanceRepository.findByCourseNameAndUsername(courseName, username)
+                .getLessonInstances()
+                .stream()
+                .filter(lessonInstance -> lessonInstance.getNumber().equals(lessonNumber))
+                .findAny()
+                .orElseThrow(GrammarException::new);
     }
 }

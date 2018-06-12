@@ -1,5 +1,6 @@
 package md.balutsel.mocointerpreter.backend.service;
 
+import md.balutsel.mocointerpreter.backend.controller.dto.LoginVisitedLesson;
 import md.balutsel.mocointerpreter.backend.model.User;
 import md.balutsel.mocointerpreter.backend.repository.UserRepository;
 import md.balutsel.mocointerpreter.engine.exceptions.CourseNotFoundException;
@@ -17,15 +18,13 @@ public class UserService {
     private CourseService courseService;
 
     @Transactional
-    public String logIn(String username, String courseName) {
+    public LoginVisitedLesson logIn(String username, String courseName) {
         if (courseService.existsByName(courseName)) {
             String registeredUser =  userRepository.findById(username)
                     .orElseGet(() -> userRepository.save(new User(username)))
                     .getName();
 
-            courseService.createCourseInstance(username, courseName);
-
-            return registeredUser;
+            return new LoginVisitedLesson(registeredUser, courseService.getCourseInstance(username, courseName));
         } else {
             throw new CourseNotFoundException();
         }

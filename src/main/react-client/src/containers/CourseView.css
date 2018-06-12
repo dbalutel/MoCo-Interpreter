@@ -7,3 +7,19 @@
     display: flex;
     width: 100%;
 }
+
+.content {
+    padding: 10px;
+    margin-top: 5%;
+    max-height: 86vh;
+    overflow-y: scroll;
+}
+
+.overflow-class {
+    max-height: 90vh;
+    overflow-y: scroll;
+}
+
+.question-cards {
+    margin-top: 14px;
+}

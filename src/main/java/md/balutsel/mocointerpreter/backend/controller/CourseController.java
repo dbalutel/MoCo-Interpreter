@@ -1,6 +1,7 @@
 package md.balutsel.mocointerpreter.backend.controller;
 
 import md.balutsel.mocointerpreter.backend.controller.dto.CourseLessonDto;
+import md.balutsel.mocointerpreter.backend.controller.dto.LoginVisitedLesson;
 import md.balutsel.mocointerpreter.backend.model.CourseInstance;
 import md.balutsel.mocointerpreter.backend.model.LessonInstance;
 import md.balutsel.mocointerpreter.backend.repository.CourseInstanceRepository;
@@ -29,7 +30,7 @@ public class CourseController {
     private CourseInstanceRepository courseInstanceRepository;
 
     @GetMapping("/api/login/{username}/course/{courseName}")
-    public String logIn(@PathVariable String username, @PathVariable String courseName) {
+    public LoginVisitedLesson logIn(@PathVariable String username, @PathVariable String courseName) {
         return userService.logIn(username, courseName);
     }
 
@@ -41,6 +42,11 @@ public class CourseController {
     @GetMapping("/api/{username}/courses/{courseName}/lessons")
     public List<CourseLessonDto> getCourseLessons(@PathVariable String username, @PathVariable String courseName) {
         return courseService.getAccessibleCourseLessonNames(username, courseName);
+    }
+
+    @GetMapping("/api/{username}/courses/{courseName}/lessons/{lessonNumber}")
+    public LessonInstance getLessonInstance(@PathVariable String username, @PathVariable String courseName, @PathVariable Integer lessonNumber) {
+        return courseService.getLessonInstance(username, courseName, lessonNumber);
     }
 
     @GetMapping("/api/courses/{courseName}/startup")

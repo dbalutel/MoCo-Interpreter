@@ -37,31 +37,26 @@ public class TextParser {
     private String parseMedia(String text, CourseFolder courseFolder, ParseMediaElement parseMediaElement) {
         Map<String, String> literals = findMediaLiterals(text, parseMediaElement);
 
-        var encoder = Base64.getEncoder();
-
         for (var literal : literals.entrySet()) {
             try {
                 switch (parseMediaElement.getLiteral()) {
                     case IMAGE_LITERAL:
                         text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
-                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getImages()
-                                        .get(literal.getKey()).toURI()))) +
+                                courseFolder.getImages().get(literal.getKey()).getName() +
                                 parseMediaElement.getRightPartHtmlReplacement());
                         break;
                     case VIDEO_LITERAL:
                         text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
-                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getVideos()
-                                        .get(literal.getKey() + ".mp4").toURI()))) +
+                                courseFolder.getVideos().get(literal.getKey() + ".mp4").getName() +
                                 parseMediaElement.getRightPartHtmlReplacement());
                         break;
                     case AUDIO_LITERAL:
                         text = text.replaceAll(Pattern.quote(literal.getValue()), parseMediaElement.getLeftPartHtmlReplacement() +
-                                encoder.encodeToString(Files.readAllBytes(Paths.get(courseFolder.getMusic()
-                                        .get(literal.getKey()).toURI()))) +
+                                courseFolder.getMusic().get(literal.getKey()).getName() +
                                 parseMediaElement.getRightPartHtmlReplacement());
                         break;
                 }
-            } catch (IOException e) {
+            } catch (RuntimeException e) {
                 throw new GrammarException();
             }
         }
