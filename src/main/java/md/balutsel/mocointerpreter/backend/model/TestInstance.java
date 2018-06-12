@@ -1,6 +1,9 @@
 package md.balutsel.mocointerpreter.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import md.balutsel.mocointerpreter.engine.model.Lesson;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,10 +19,15 @@ public class TestInstance {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_course_instance", referencedColumnName = "id", nullable = false, updatable = false)
-    private CourseInstance courseInstance;
+    @Column(name = "score", columnDefinition = "number")
+    private Double score;
 
-    @OneToMany(mappedBy = "test", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "fk_lesson_instance", referencedColumnName = "id", nullable = false, updatable = false)
+    @JsonBackReference
+    private LessonInstance lessonInstance;
+
+    @OneToMany(mappedBy = "testInstance", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<QuestionInstance> questions = new ArrayList<>();
 }

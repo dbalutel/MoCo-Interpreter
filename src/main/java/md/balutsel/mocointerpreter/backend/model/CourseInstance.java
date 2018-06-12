@@ -1,7 +1,7 @@
 package md.balutsel.mocointerpreter.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import md.balutsel.mocointerpreter.backend.model.light.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,19 +17,19 @@ public class CourseInstance {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
+    @Column(name = "name", columnDefinition = "varchar2(50)")
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "fk_user_name", referencedColumnName = "name", nullable = false, updatable = false)
+    @JsonManagedReference("user")
     private User user;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @Column(name = "visited_lessons")
     private List<Integer> visitedLessons = new ArrayList<>();
 
-    @OneToMany(mappedBy = "courseInstance", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<TestInstance> testInstances = new ArrayList<>();
-
-    public void addTestInstance(TestInstance testInstance) {
-        testInstance.setCourseInstance(this);
-        testInstances.add(testInstance);
-    }
+    @OneToMany(mappedBy = "courseInstance", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonManagedReference("lesson")
+    private List<LessonInstance> lessonInstances = new ArrayList<>();
 }
